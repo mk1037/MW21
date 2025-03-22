@@ -93,7 +93,7 @@ Collection of files to be played during breaks must be placed in some directory 
 The total number must be divisible by 10 e.g. 10, 20, 30, 70, 150 etc...
 Prefix must be 4-digits with leading zeros. Only ASCII, no-spaces allowed.
 
-Script to start the system is run_mw21.sh in web directory
+Script to start the system is `run_mw21.sh` in `web/` directory
 
 Detailed installation procedure is average-complex and not documented for now. I hope to provide more documentation soon.
 
