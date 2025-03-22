@@ -1,0 +1,174 @@
+# Copyright (C) 2017-2025 Marek Momot
+#
+# This file is part of MW21.
+#
+# MW21 is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 3 of the License, or
+# (at your option) any later version.
+#
+# MW21 is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with MW21.  If not, see <http://www.gnu.org/licenses/>.
+
+
+[MAIN]
+
+################# DISPLAY ####################
+#always put ff alpha at background colors
+backgroundColor0         = 51316EFF
+sungBackgroundColor0     = 51316EFF
+lyricsColor0             = FCE94F
+sungLyricsColor0         = 44AAAA
+lyricsOutlineColor0      = 443440
+sungLyricsOutlineColor0  = 443440
+hintsBackgroundColor0    = 51316EFF
+activeHintsBackgroundColor0 = 51316EFF
+hintsColor0              = 747474
+activeHintsColor0        = EEEEEC
+hintsOutlineColor0       = 443440
+activeHintsOutlineColor0 = 443440
+
+backgroundColor1         = 50225cff
+sungBackgroundColor1     = 8d6198ff
+lyricsColor1             = ececec
+sungLyricsColor1         = FD4794
+lyricsOutlineColor1      = 000000
+sungLyricsOutlineColor1  = 000000
+hintsBackgroundColor1    = 50225cff
+activeHintsBackgroundColor1 = 8d6198ff
+hintsColor1              = 4c4c4c
+activeHintsColor1        = 7c7c7c
+hintsOutlineColor1       = a0a0a0
+activeHintsOutlineColor1 = 000000
+
+backgroundColor2         = 85de90ff
+sungBackgroundColor2     = b8fea0ff
+lyricsColor2             = ececec
+sungLyricsColor2         = de717c
+lyricsOutlineColor2      = 000000
+sungLyricsOutlineColor2  = 000000
+hintsBackgroundColor2    = 85de90ff
+activeHintsBackgroundColor2 = b8fea0ff
+hintsColor2              = 7c7c7c
+activeHintsColor2        = bcbcbc
+hintsOutlineColor2       = 202020
+activeHintsOutlineColor2 = 202020
+
+outlineWidth           = 2
+fontDirPrefix          = /usr/share/fonts/truetype/dejavu/
+fontName               = DejaVuSans-Bold.ttf
+fontSize               = 56
+
+textPointerPath        = /home/USERNAME/common_files_mw21/textpath
+
+channel                = 3
+
+noteGEQ                = 1
+noteLT                 = 4
+velGEQ                 = 1
+velLT                  = 2
+
+ctrlNum4Fw             = 81
+ctrlVal4Fw             = 127
+ctrlNum4Bw             = 80
+ctrlVal4Bw             = 127
+
+noteRead               = 4
+velRead                = 1
+
+noteBack               = 5
+velBack                = 1
+
+noteTheme1               = 6
+velTheme1                = 1
+
+noteTheme2               = 7
+velTheme2                = 1
+
+noteTheme3               = 8
+velTheme3                = 1
+
+noteHome                 = 9
+velHome                  = 1
+
+notePCKbdEnable          = 10
+notePCKbdDisable         = 11
+
+areaWidth              = 800
+areaHeight             = 88
+
+####### PROXY ############################
+
+PR3000_instruction        = /home/USERNAME/common_files_mw21/PR3000_instruction
+MAIN_PR_instruction       = /home/USERNAME/common_files_mw21/MAIN_PR_instruction
+
+PR3000_pid                = /home/USERNAME/common_files_mw21/PR3000_pid
+MAIN_PR_pid               = /home/USERNAME/common_files_mw21/MAIN_PR_pid
+
+###### STARTER ##############################
+
+STARTER_instruction       = /home/USERNAME/common_files_mw21/STARTER_instruction
+STARTER_pid               = /home/USERNAME/common_files_mw21/STARTER_pid
+
+
+####### MODELINE ############################
+
+modeline_instruction      = /home/USERNAME/common_files_mw21/modeline_instruction
+modeline_pid              = /home/USERNAME/common_files_mw21/modeline_pid
+
+# modeline listens on this channel
+modelineControlChannel    = 1
+dataDir                   = /home/USERNAME/sglnk
+
+modelineBackgroundColor_neutral1         = 0000ffff
+modelineBackgroundColor_neutral2         = babdb6ff
+modelineBackgroundColor_blink1           = ffffffff
+modelineBackgroundColor_blink2           = ef2929ff
+modelineBackgroundColor_ok               = 3d7d00ff
+modelineBackgroundColor_search           = fcaf3eff
+modelineBackgroundColor_found            = fcffaeff
+
+modelineFontColor_neutral1         = f3f3f3
+modelineFontColor_neutral2         = ffffff
+modelineFontColor_blink1           = ef2929
+modelineFontColor_blink2           = ffffff
+modelineFontColor_ok               = ffffff
+modelineFontColor_search           = ffffff
+modelineFontColor_found            = bd0052
+
+modelineOutlineColor_neutral1         = 888a85
+modelineOutlineColor_neutral2         = 000000
+modelineOutlineColor_blink1           = 000000
+modelineOutlineColor_blink2           = 000000
+modelineOutlineColor_ok               = 000000
+modelineOutlineColor_search           = 000000
+modelineOutlineColor_found            = 000000
+
+blinkCounter                          = 8
+blinkPeriod                           = 250
+timeout                               = 800
+
+modelineAreaWidth                     = 800
+modelineAreaHeight                    = 80
+firstRow                              = True
+secondRow                             = True
+
+############# SEQ CONTROLLER ################
+
+sc_trap_pid_path                  = /home/USERNAME/common_files_mw21/sc_trap_pid
+seq_controller_instruction        = /home/USERNAME/common_files_mw21/seq_controller_instruction
+
+################# CHOOSER ###################
+
+chooser_pid_path           = /home/USERNAME/common_files_mw21/chooser_pid
+chooser_instruction_path   = /home/USERNAME/common_files_mw21/chooser_instruction
+
+################## REMOTE ###################
+
+remote_pid_path           = /home/USERNAME/common_files_mw21/remote_pid
+remote_instruction_path   = /home/USERNAME/common_files_mw21/remote_instruction

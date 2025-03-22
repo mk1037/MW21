@@ -1,0 +1,88 @@
+﻿###
+
+
+[x264] # H.264/MPEG-4 Part 10/AVC encoder (x264)
+
+sout-x264-preset=ultrafast
+
+sout-x264-tune=film
+
+[freetype] # Freetype2 font renderer
+
+freetype-font=DejaVu Sans
+
+[skins2] # Skinnable Interface
+
+skins2-last=/usr/share/vlc/skins2/default.vlt
+
+skins2-config=["aboutwin" "aboutwinwin-main" 795 454 330 171 0]["eqwin" "eqwin-main" 795 454 330 171 0]["fullscreenController" "fsc_normal" 710 918 500 130 0]["main" "normal" 710 365 500 350 1]["plwin" "plwin-normal" 806 419 500 350 0]
+
+[qt4] # Qt interface
+
+qt-recentplay=0
+
+qt-continue=0
+
+qt-privacy-ask=0
+
+[rotate] # Rotate video filter
+
+rotate-angle=89.000000
+
+[transform] # Video transformation filter
+
+transform-type=270
+
+[lua] # Lua interpreter
+
+http-password=jakies
+
+[alsa] # ALSA audio output
+
+# Software gain (float)
+#alsa-gain=1.000000
+
+[afile] # File audio output
+
+[jack] # JACK audio output
+
+[equalizer] # Equalizer with 10 bands
+
+# Equalizer preset (string)
+#equalizer-preset=flat
+
+# Bands gain (string)
+#equalizer-bands=
+
+# Two pass (boolean)
+#equalizer-2pass=0
+
+# Use VLC frequency bands (boolean)
+#equalizer-vlcfreqs=1
+
+# Global gain (float)
+#equalizer-preamp=12.000000
+
+[mono] # Stereo to mono downmixer
+
+[gain] # Gain control filter
+
+[logger] # File logging
+
+[core] # core program
+
+force-dolby-surround=2
+
+audio-resampler=any
+
+aout=alsa
+
+# Audio filters (string)
+#audio-filter=
+
+vout=any
+
+play-and-exit=1
+
+extraintf=http
+
