@@ -5,7 +5,7 @@ This program is a simple karaoke / stage-prompter application for singers and am
 
 ![MW21_playing](mw21/pictures/MW21_playing.png)
 
-It's written for GNU/Linux operating system. For now it should integrate with little effort on debian-based systems with `XFCE` desktop.
+It's written for GNU/Linux operating system. For now it should integrate with little effort on debian-based systems with `XFCE`/`Mate` desktop.
 
 In fact - it's a bundle of few applications communicating mostly via `alsa` midi and plain inter-process communications (signals).
 It is is controlled mostly via some physical MIDI device (keyboard, pad, launcher, whatever ...) or application e.g. `vkeybd` for Linux.
