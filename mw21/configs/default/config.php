@@ -19,7 +19,7 @@
  * along with MW21.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-$g_workingPath = "/home/USERNAME/MW21/MW21/mw21";
+$g_workingPath = "/home/USERNAME/MW21/mw21";
 $g_filesDir2 = "/home/USERNAME/plink";
 
 # SYNCHRONIZED WITH mw2_config
