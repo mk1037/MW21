@@ -3,7 +3,7 @@
 ## What is MW21
 This program is a simple karaoke / stage-prompter application for singers and amateur music bands.
 
-![MW21_playing](./pictures/MW21_playing.png)
+![MW21_playing](mw21/pictures/MW21_playing.png)
 
 It's written for linux operating system. For now it should integrate with little effort on debian-based systems with `XFCE` desktop.
 
