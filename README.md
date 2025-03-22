@@ -23,7 +23,7 @@ MIDI sequencing - `pmidi` (command line midi player).
 Scripts for placing windows is `wmctrl` - it relies on `X11`
 
 ## Data format
-Creating text to be displayed is easy. Those are regular plain-text files. Synchronized with your music is a separate thing. It's not a piece of cake and basic MIDI-sequencer experience is needed. Note C#-0 with velocity 1 at channel 4 is increasing the pointer. Note A-0 on the same channel/velocity re-winds text to the beginning. Some documentation on this - planned to be provided soon.
+Creating text to be displayed is easy. Those are regular plain-text files (tokens separated with `|` or newline, hint lines starting with `~`). Synchronized with your music is a separate thing. It's not a piece of cake and basic MIDI-sequencer experience is needed. Note C#-0 with velocity 1 at channel 4 is increasing the pointer. Note A-0 on the same channel/velocity re-winds text to the beginning. Some documentation on this - planned to be provided soon.
 
 ## Installation
 For today - the only way to install is to compile it on your own. Suitable packages for e.g. `linux-lite-7.2` are:
