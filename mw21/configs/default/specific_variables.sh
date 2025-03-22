@@ -18,7 +18,7 @@
 # along with MW21.  If not, see <http://www.gnu.org/licenses/>.
 
 
-MAIN_PREFIX="/home/USERNAME/MW21/MW21/mw21"
+MAIN_PREFIX="/home/USERNAME/MW21/mw21"
 COMMON_DIRECTORY="/home/USERNAME/common_files_mw21"
 
 DEFAULT_TIMEOUT="0.5"
