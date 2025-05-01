@@ -114,11 +114,29 @@ int TextQueue::read_lines(Glib::ustring path, Glib::ustring p_file_name)
       continue;
     }
 
-    //comment
-    if(';' == ((gunichar)l_string.at(0)) && ';' == ((gunichar)l_string.at(1)))
+    //handling comment
+    if (l_string.length() > 1) //comment must have at least two chars ;;
     {
-      continue;
+      last = 0;
+      do
+      {
+        found = (int) l_string.find((gunichar)';', last);
+        if(found >= 0)
+          if ( l_string.length() > found + 1 )
+            if ( ';' == l_string.at( found + 1 ) )
+            {
+              l_string = l_string.substr(0, found);
+              break;
+            }
+            else
+              last = found + 1;
+          else break;
+        else break;
+      }
+      while(last < l_string.length());
     }
+
+    if (l_string.empty()) continue;
 
     l_line_obj.clear();
     l_line_obj.set_hint(false);
@@ -146,22 +164,19 @@ int TextQueue::read_lines(Glib::ustring path, Glib::ustring p_file_name)
       if(found < 0)
       {
         t_chunk = l_string.substr(last, l_string.length() - last);
-        if(! t_chunk.empty())
-        {
-          l_line_obj.push(t_chunk);
-        }
+        l_line_obj.push(t_chunk);
         is_next = false;
       }
       else
       {
         t_chunk = l_string.substr(last, found - last);
         last = found;
-        if(t_chunk.empty()) continue;
 
         l_line_obj.push(t_chunk);
       }
     }
     while (is_next);
+    l_line_obj.escape_chars();
     lines.push_back(l_line_obj);
     t_chunks_acc += l_line_obj.get_size();
   }
@@ -205,6 +220,41 @@ void TextLine::clear()
 {
   chunks.clear();
   is_hint = false;
+}
+
+void TextLine::escape_chars()
+{
+  int cpos = 0;
+  int length;
+  int lastchunk = (int) get_size() - 1;
+
+  if ( (int) get_size() < 2) return;
+
+  do
+  {
+    std::vector<Glib::ustring>::iterator it = chunks.begin();
+    std::vector<Glib::ustring>::iterator cchunk = it + cpos;
+    if ( cchunk->empty() )
+    {
+      *cchunk = *(cchunk+1);
+      for (int i = cpos+1; i < lastchunk; i++)
+        *(it+i) = *(it+i+1);
+      chunks.erase(chunks.end() - 1);
+    }
+    else if ( '\\' == ( (gunichar) ( cchunk->at(cchunk->length() - 1) ) ) )
+    {
+      Glib::ustring tmp = *cchunk;
+      tmp.replace(tmp.size() - 1, 1, "|");
+      *cchunk = tmp + *(cchunk+1);
+      for (int i = cpos+1; i < lastchunk; i++)
+        *(it+i) = *(it+i+1);
+      chunks.erase(chunks.end() - 1);
+    }
+    else
+      cpos++;
+    lastchunk = (int) get_size() - 1;
+  }
+  while (cpos < lastchunk);
 }
 
 void TextQueue::print()

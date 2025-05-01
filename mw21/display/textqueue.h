@@ -39,6 +39,7 @@ class TextLine
     TextLine();
     void print();
     void push(Glib::ustring chunk);
+    void escape_chars();
     void clear();
     void set_hint(bool hint);
     bool get_hint();
