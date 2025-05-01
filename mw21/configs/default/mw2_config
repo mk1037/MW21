@@ -64,7 +64,7 @@ fontDirPrefix          = /usr/share/fonts/truetype/dejavu/
 fontName               = DejaVuSans-Bold.ttf
 fontSize               = 56
 
-textPointerPath        = /home/USERNAME/common_files_mw21/textpath
+textPointerPath        = /home/USERNAME/MW21/mw21/common_files_mw21/textpath
 
 channel                = 3
 
@@ -104,26 +104,26 @@ areaHeight             = 88
 
 ####### PROXY ############################
 
-PR3000_instruction        = /home/USERNAME/common_files_mw21/PR3000_instruction
-MAIN_PR_instruction       = /home/USERNAME/common_files_mw21/MAIN_PR_instruction
+PR3000_instruction        = /home/USERNAME/MW21/mw21/common_files_mw21/PR3000_instruction
+MAIN_PR_instruction       = /home/USERNAME/MW21/mw21/common_files_mw21/MAIN_PR_instruction
 
-PR3000_pid                = /home/USERNAME/common_files_mw21/PR3000_pid
-MAIN_PR_pid               = /home/USERNAME/common_files_mw21/MAIN_PR_pid
+PR3000_pid                = /home/USERNAME/MW21/mw21/common_files_mw21/PR3000_pid
+MAIN_PR_pid               = /home/USERNAME/MW21/mw21/common_files_mw21/MAIN_PR_pid
 
 ###### STARTER ##############################
 
-STARTER_instruction       = /home/USERNAME/common_files_mw21/STARTER_instruction
-STARTER_pid               = /home/USERNAME/common_files_mw21/STARTER_pid
+STARTER_instruction       = /home/USERNAME/MW21/mw21/common_files_mw21/STARTER_instruction
+STARTER_pid               = /home/USERNAME/MW21/mw21/common_files_mw21/STARTER_pid
 
 
 ####### MODELINE ############################
 
-modeline_instruction      = /home/USERNAME/common_files_mw21/modeline_instruction
-modeline_pid              = /home/USERNAME/common_files_mw21/modeline_pid
+modeline_instruction      = /home/USERNAME/MW21/mw21/common_files_mw21/modeline_instruction
+modeline_pid              = /home/USERNAME/MW21/mw21/common_files_mw21/modeline_pid
 
 # modeline listens on this channel
 modelineControlChannel    = 1
-dataDir                   = /home/USERNAME/sglnk
+dataDir                   = /home/USERNAME/MW21/karaoke_link
 
 modelineBackgroundColor_neutral1         = 0000ffff
 modelineBackgroundColor_neutral2         = babdb6ff
@@ -160,15 +160,15 @@ secondRow                             = True
 
 ############# SEQ CONTROLLER ################
 
-sc_trap_pid_path                  = /home/USERNAME/common_files_mw21/sc_trap_pid
-seq_controller_instruction        = /home/USERNAME/common_files_mw21/seq_controller_instruction
+sc_trap_pid_path                  = /home/USERNAME/MW21/mw21/common_files_mw21/sc_trap_pid
+seq_controller_instruction        = /home/USERNAME/MW21/mw21/common_files_mw21/seq_controller_instruction
 
 ################# CHOOSER ###################
 
-chooser_pid_path           = /home/USERNAME/common_files_mw21/chooser_pid
-chooser_instruction_path   = /home/USERNAME/common_files_mw21/chooser_instruction
+chooser_pid_path           = /home/USERNAME/MW21/mw21/common_files_mw21/chooser_pid
+chooser_instruction_path   = /home/USERNAME/MW21/mw21/common_files_mw21/chooser_instruction
 
 ################## REMOTE ###################
 
-remote_pid_path           = /home/USERNAME/common_files_mw21/remote_pid
-remote_instruction_path   = /home/USERNAME/common_files_mw21/remote_instruction
+remote_pid_path           = /home/USERNAME/MW21/mw21/common_files_mw21/remote_pid
+remote_instruction_path   = /home/USERNAME/MW21/mw21/common_files_mw21/remote_instruction

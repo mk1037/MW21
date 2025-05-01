@@ -20,10 +20,10 @@
  */
 
 $g_workingPath = "/home/USERNAME/MW21/mw21";
-$g_filesDir2 = "/home/USERNAME/plink";
+$g_filesDir2 = "/home/USERNAME/MW21/playlist_link";
 
 # SYNCHRONIZED WITH mw2_config
-$g_dataDir = "/home/USERNAME/sglnk";
+$g_dataDir = "/home/USERNAME/MW21/karaoke_link";
 
 
 $g_logPath = "$g_workingPath/web/mw2_web_log";
@@ -36,7 +36,7 @@ $g_playListToDisplayPath = "$g_workingPath/web/playlist_to_display";
 $g_noRandomLimit = 4*10;
 
 # SYNCHRONIZED WITH scripts_config.sh !!!
-$g_common_directory="/home/USERNAME/common_files_mw21";
+$g_common_directory="/home/USERNAME/MW21/mw21/common_files_mw21";
 $g_defaultVolumePath = "$g_common_directory/default_volume";
 $g_playvpl2ArgsPath = "$g_common_directory/playvpl2_args";
 

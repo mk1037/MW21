@@ -26,54 +26,22 @@ Scripts for placing windows is `wmctrl` - it relies on `X11`
 Creating text to be displayed is easy. Those are regular plain-text files (tokens separated with `|` or newline, hint lines starting with `~`). Synchronized with your music is a separate thing. It's not a piece of cake and basic MIDI-sequencer experience is needed. Note C#-2 with velocity 1 at channel 4 is increasing the pointer. Note A-2 on the same channel/velocity re-winds text to the beginning. Some documentation on this - planned to be provided soon.
 
 ## Installation
-For today - the only way to install is to compile it on your own. Suitable packages for e.g. `linux-lite-7.2` are:
+Being in `MW21/` you simply run
 
-    apt-get install -y build-essential \
-      pkg-config \
-      libgtkmm-3.0-dev \
-      libasound2-dev \
-      libfreetype-dev \
-      git \
-      wmctrl \
-      vlc \
-      bc \
-      pmidi \
-      a2jmidid \
-      gmidimonitor \
-      vkeybd \
-      apache2 \
-      libapache2-mod-php \
-      mc \
-      meld
+    ./installMW21.sh
 
-Being in `mw21/` you can do:
+This script was tested at Linux Lite 7.2 but should work for many debian-based distributions.
 
-    MW2_DIR=$(pwd) ; \
-    cd $MW2_DIR/chooser/ ; make ; \
-    cd $MW2_DIR/display/ ; make ; \
-    cd $MW2_DIR/g_proxy/ ; make ; \
-    cd $MW2_DIR/modeline/ ; make ; \
-    cd $MW2_DIR/remote/ ; make ; \
-    cd $MW2_DIR/ ## MAKE_ALL - to build
 
-    MW2_DIR=$(pwd) ; \
-    cd $MW2_DIR/chooser/ ; make clean ; \
-    cd $MW2_DIR/display/ ; make clean ; \
-    cd $MW2_DIR/g_proxy/ ; make clean ; \
-    cd $MW2_DIR/modeline/ ; make clean ; \
-    cd $MW2_DIR/remote/ ; make clean ; \
-    cd $MW2_DIR/ ## MAKE_CLEAN - to clean
-
-Apache must be run as regular user (not `www-data` user). It's definitely __not_recommended__ for real web servers (publicly-available), but for this application (running only for few hours in local network) it should be fine.
+If you decide to run apache2 server, please remember that it must be run as regular user (not `www-data` user). It's definitely __not_recommended__ for real web servers (public-available), but for this application (running only for few hours in local network) it should be fine.
 
 Please remember to publish `mw21/web` diretory via your `apache2` web server.
 
-Several adjusts have to be done in config files (`config/default/mw2_config`, `config/default/config.php`, `config/default/specific_variables.sh` ). Especially - replacing `USERNAME` to your linux account name.
 
 ## Data setup
 Also suitable file must be placed in songs directory of the structure below:
 
-    songs_files/
+    karaoke/
     `-- bank_3/
         |-- delay/
         |-- midi/
