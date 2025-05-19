@@ -1,19 +1,19 @@
 # MW21 - Music Workstation
 
 ## What is MW21
-This program is a simple karaoke / stage-prompter application for singers and amateur music bands.
+MW21 is a simple karaoke / stage-prompter application for singers and amateur music bands. It's able to playback music and display lyrics in four rows highlighting it in-sync to the music.
 
-![MW21_playing](mw21/pictures/MW21_playing.png)
+![MW21 playing](mw21/pictures/MW21_playing.png)
 
-It's written for GNU/Linux operating system. For now it should integrate with little effort on debian-based systems with `XFCE`/`Mate` desktop.
+It's designed to run on GNU/Linux operating system. Currently - installation scripts are designed for debian-based systems with `XFCE`/`Mate` desktop.
 
-In fact - it's a bundle of few applications communicating mostly via `alsa` midi and plain inter-process communications (signals).
-It is is controlled mostly via some physical MIDI device (keyboard, pad, launcher, whatever ...) or application e.g. `vkeybd` for Linux.
+In fact - `MW21` is a bundle of applications and scripts communicating  via `alsa` midi and inter-process communications (signals).
+It is controlled via any physical MIDI device (keyboard, pad, launcher, whatever ...) or application e.g. `vkeybd` for Linux.
 
-It also integrates through php/shell scripts with `apache2` server. It offers simple web-based playlist for playback music through e.g. breaks during your performance. It's convenient for controlling music player with your mobile phone staying connected in LAN.
+It also integrates through `php`/`shell` scripts with `apache2` server. It offers simple web-based playlist for playback music through e.g. breaks during your performance. It's convenient for controlling music player with your mobile phone staying connected in LAN.
 
 ## Concept
-The basic idea behind is simultaneous playback of an audio file (wav or mp3) and a midi file (with adjustable `delay` of audio __following__ midi). Midi events emitted from the midi player are forwarded to the `display` program which increases pointer of the highlighted text. It works really well :-)
+The basic idea behind is simultaneous playback of an audio file (wav or mp3) and a midi file (with adjustable `delay` of audio __following__ midi). Midi events emitted from the midi player are forwarded to the `display` program which advances pointer of the highlighted text. It works quite well :-)
 
 ## Implementation
 Window library is `gtkmm-3.0`
@@ -23,23 +23,36 @@ MIDI sequencing - `pmidi` (command line midi player).
 Scripts for placing windows is `wmctrl` - it relies on `X11`
 
 ## Data format
-Creating text to be displayed is easy. Those are regular plain-text files (tokens separated with `|` or newline, hint lines starting with `~`). Synchronized with your music is a separate thing. It's not a piece of cake and basic MIDI-sequencer experience is needed. Note C#-2 with velocity 1 at channel 4 is increasing the pointer. Note A-2 on the same channel/velocity re-winds text to the beginning. Some documentation on this - planned to be provided soon.
+Creating text for karaoke is easy. It is enough to write regular plain-text file (tokens separated with `|` or newline, hint lines starting with `~`). Synchronization to the music is a separate thing. It's not a piece of cake and basic MIDI-sequencer experience is needed. Basically - you need to create a midi file with the same length as your audio file.
+
+Note C#-2 with velocity 1 at channel 4 is advancing the pointer of highlighted text. Note A-2 on the same channel/velocity re-winds text to the beginning.
+Some documentation on this - planned to be provided soon.
 
 ## Installation
-Being in `MW21/` you simply run
+For the __easiest installation__ `MW21` should be placed directly in your home directory. You simply run:
 
+    cd ~/
+    git clone http://github.com/mk1037/MW21
+    cd ~/MW21/
     ./installMW21.sh
 
 This script was tested at Linux Lite 7.2 but should work for many debian-based distributions.
 
 
-If you decide to run apache2 server, please remember that it must be run as regular user (not `www-data` user). It's definitely __not_recommended__ for real web servers (public-available), but for this application (running only for few hours in local network) it should be fine.
+If you decide to run apache2 server, please remember that it must be run as regular user (not `www-data` user). It's definitely __not_recommended__ for real web servers (public-available), but for this application (running only for few hours in local network) should be fine.
 
-Please remember to publish `mw21/web` diretory via your `apache2` web server.
+Please remember to publish `mw21/web` directory via your `apache2` web server.
 
 
 ## Data setup
-Also suitable file must be placed in songs directory of the structure below:
+To donwload and install some __example tracks__ just do:
+
+    cd ~/MW21/
+    ./exampleTracks.sh
+
+You are ready to run `MW21` and play !
+
+Files will be placed in karaoke directory with the structure below:
 
     karaoke/
     `-- bank_3/
@@ -49,6 +62,9 @@ Also suitable file must be placed in songs directory of the structure below:
         `-- waves/
 
 to be scanned correctly via `modeline` program.
+
+__Optionally__
+
 Collection of files to be played during breaks must be placed in some directory with prefixes:
 
     0000_abcxyz.mp3
@@ -61,10 +77,84 @@ Collection of files to be played during breaks must be placed in some directory 
 The total number must be divisible by 10 e.g. 10, 20, 30, 70, 150 etc...
 Prefix must be 4-digits with leading zeros. Only ASCII, no-spaces allowed.
 
-Script to start the system is `run_mw21.sh` in `web/` directory
+## Running and playing songs
+Run `MW21` by executing:
 
-Detailed installation procedure is average-complex and not documented for now. I hope to provide more documentation soon.
+    cd ~/MW21/mw21/web/
+    ./run_mw21.sh
 
+This runs all components as a processes in dedicated terminals, makes midi connections via `aconnect` and places windows in virtual desktops according to coordinates defined in `MW21/mw21/config/default/specific_variables.sh`
+You need to have at least 3 virtual desktops in your `Mate`/`XFCE` dsktop environment.
+
+Depending on your graphical environment and installed terminal - you may need to adjust the variable `TERMINAL_BIN` in `MW21/mw21/config/default/specific_variables.sh`
+
+The entry point for entire system is `Main proxy` referenced in short by label:
+
+    MAIN_PR
+
+Once started, you can check the connections graph with command:
+
+    aconnect -l
+
+This should show you something like:
+
+![MW21 connections](mw21/pictures/MW21_connections.png)
+
+Visualisation of connections graph shown below:
+
+![MW21 graph](mw21/pictures/MW21_graph.png)
+
+Now - we want to choose songs, load them and play in `MW21`
+
+One possible way is to run `vkeybd` application and connect it to `MAIN_PR`.
+
+Open a new console and type:
+
+    vkeybd
+
+When started, open another console and connect it to the `MAIN_PR` with command:
+
+    aconnect 'Virtual Keyboard':0 'MAIN_PR':0
+
+or alternatively (in this case)
+
+    aconnect 134:0 130:0
+
+Now it's connected:
+
+![MW21 vkeybd connected](mw21/pictures/MW21_vkeybdConnected.png)
+
+In `vkeybd` set `Key`: 60 and `Velocity`: 127
+
+![MW21 vkeybd](mw21/pictures/MW21_vkeybd.png)
+
+Operate `MW21` by pressing keys.
+
+White key jumps to char.
+
+Lower octave:
+
+__C# - previous char__
+
+__D# - previous song__
+
+__F# - next song__
+
+__G# - next song__
+
+__A# - next char__
+
+
+Middle octave:
+
+__C# - stop__
+
+__F# - load__
+
+__G# - play__
+
+Instead of virtual keyboard you can use physical MIDI device on the stage. Possibly some event mapping is needed. All events accepted by `modeline` are defined in `MW21/mw21/modeline/midiclient.h`
+Still - the entry point is `MAIN_PR` which may filter out some events.
 
 Have fun!
 
