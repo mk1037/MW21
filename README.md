@@ -45,7 +45,7 @@ Please remember to publish `mw21/web` directory via your `apache2` web server.
 
 
 ## Data setup
-To donwload and install some __example tracks__ just do:
+To download and install some __example tracks__ just do:
 
     cd ~/MW21/
     ./exampleTracks.sh
@@ -155,6 +155,10 @@ __G# - play__
 
 Instead of virtual keyboard you can use physical MIDI device on the stage. Possibly some event mapping is needed. All events accepted by `modeline` are defined in `MW21/mw21/modeline/midiclient.h`
 Still - the entry point is `MAIN_PR` which may filter out some events.
+
+Many things need to be improved and optimized in this system. Speed of rendering text is one of those. There are possible lags when running `display` application in higher resolutions. For now the best performance you will achieve setting `areaWidth` width to less or equal 800 pixels (file `MW21/mw21/configs/default/mw2_config`).
+
+In fact - higher resolution is not needed for this type of application. Having big display (around 20 inches) you can still clearly see it even from few meters. Setting your display resolution to something like __800x600__ (like in the first picture) or __720x400__ or __720x405__ is recommended.
 
 Have fun!
 
