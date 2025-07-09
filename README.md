@@ -78,6 +78,8 @@ The total number must be divisible by 10 e.g. 10, 20, 30, 70, 150 etc...
 Prefix must be 4-digits with leading zeros. Only ASCII, no-spaces allowed.
 
 ## Running and playing songs
+Right after installation - before first run of MW21 it's recommended to start VLC player (with GUI) and simply close it. The reason is to initialize some VLC config files.
+
 Run `MW21` by executing:
 
     cd ~/MW21/mw21/web/
