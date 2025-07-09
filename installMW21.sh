@@ -47,6 +47,7 @@ sudo apt-get install -y build-essential \
   gmidimonitor \
   mc \
   vkeybd \
+  wget \
   meld
 
 message "Compiling MW21"
