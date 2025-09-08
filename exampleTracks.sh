@@ -26,12 +26,12 @@ MW2_DIR=$(pwd)
 [ -L $MW2_DIR/karaoke_link ] && rm $MW2_DIR/karaoke_link
 
 [ -d $MW2_DIR/ExampleTracksForMW21-main ] && rm -rf $MW2_DIR/ExampleTracksForMW21-main
-[ -d $MW2_DIR/karaoke ] && rm -rf $MW2_DIR/karaoke
+[ -d $MW2_DIR/collections/example ] && rm -rf $MW2_DIR/collections/example
 
 [ ! -f main.tar.gz ] && wget https://github.com/mk1037/ExampleTracksForMW21/archive/refs/heads/main.tar.gz
 tar -zxvf main.tar.gz ExampleTracksForMW21-main/ExampleTracksForMW21/karaoke/
-mv ExampleTracksForMW21-main/ExampleTracksForMW21/karaoke/ $MW2_DIR/karaoke
+mv ExampleTracksForMW21-main/ExampleTracksForMW21/karaoke/ $MW2_DIR/collections/example
 
-ln -s $MW2_DIR/karaoke $MW2_DIR/karaoke_link
+ln -s $MW2_DIR/collections/example $MW2_DIR/karaoke_link
 
 

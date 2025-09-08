@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="7.6771884mm"
+   height="6.098248mm"
+   viewBox="0 0 7.6771884 6.098248"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   sodipodi:docname="stopMW21.svg"
+   inkscape:export-filename="stopMW21.png"
+   inkscape:export-xdpi="271.20001"
+   inkscape:export-ydpi="271.20001"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="true"
+     inkscape:zoom="6.7277216"
+     inkscape:cx="-5.2023556"
+     inkscape:cy="13.526125"
+     inkscape:window-width="1680"
+     inkscape:window-height="987"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1">
+    <inkscape:grid
+       type="xygrid"
+       id="grid1097"
+       originx="-34.652894"
+       originy="-39.741651" />
+  </sodipodi:namedview>
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-34.652895,-39.74165)">
+    <path
+       style="fill:#1500cb;fill-opacity:1;stroke:#000001;stroke-width:0.174879;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+       d="m 34.925001,42.862499 v 2.645833 h 2.645833 l 0,-2.645833 z"
+       id="path1095"
+       sodipodi:nodetypes="ccccc" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:3.175px;font-family:'DejaVu Sans';-inkscape-font-specification:'DejaVu Sans Bold';fill:#509aff;fill-opacity:1;stroke:#000001;stroke-width:0.12;stroke-linejoin:round;stroke-dasharray:none"
+       x="35.707691"
+       y="42.116238"
+       id="text186"><tspan
+         sodipodi:role="line"
+         id="tspan184"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'DejaVu Sans';-inkscape-font-specification:'DejaVu Sans Bold';fill:#509aff;fill-opacity:1;stroke-width:0.12;stroke-linejoin:round;stroke-dasharray:none"
+         x="35.707691"
+         y="42.116238">MW</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:3.175px;font-family:'DejaVu Sans';-inkscape-font-specification:'DejaVu Sans Bold';fill:#509aff;fill-opacity:1;stroke:#000001;stroke-width:0.12;stroke-linejoin:round;stroke-dasharray:none"
+       x="38.070339"
+       y="45.042355"
+       id="text240"><tspan
+         sodipodi:role="line"
+         id="tspan238"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'DejaVu Sans';-inkscape-font-specification:'DejaVu Sans Bold';fill:#509aff;fill-opacity:1;stroke-width:0.12;stroke-linejoin:round;stroke-dasharray:none"
+         x="38.070339"
+         y="45.042355">21</tspan></text>
+  </g>
+</svg>

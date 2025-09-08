@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="7.6771884mm"
+   height="6.098248mm"
+   viewBox="0 0 7.6771884 6.098248"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   sodipodi:docname="reconnectMW21.svg"
+   inkscape:export-filename="reconnectMW21.png"
+   inkscape:export-xdpi="277.82001"
+   inkscape:export-ydpi="277.82001"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="true"
+     inkscape:zoom="9.5144352"
+     inkscape:cx="4.3092416"
+     inkscape:cy="14.92469"
+     inkscape:window-width="1680"
+     inkscape:window-height="987"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1">
+    <inkscape:grid
+       type="xygrid"
+       id="grid1097"
+       originx="-34.652894"
+       originy="-39.741651" />
+  </sodipodi:namedview>
+  <defs
+     id="defs2">
+    <marker
+       style="overflow:visible"
+       id="TriangleStart"
+       refX="0"
+       refY="0"
+       orient="14.00"
+       inkscape:stockid="TriangleStart"
+       markerWidth="2.1240001"
+       markerHeight="2.4554913"
+       viewBox="0 0 5.3244081 6.1553851"
+       inkscape:isstock="true"
+       inkscape:collect="always"
+       preserveAspectRatio="xMidYMid">
+      <path
+         transform="scale(0.5)"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:1pt"
+         d="M 5.77,0 -2.88,5 V -5 Z"
+         id="path135" />
+    </marker>
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-34.652895,-39.74165)">
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:3.175px;font-family:'DejaVu Sans';-inkscape-font-specification:'DejaVu Sans Bold';fill:#ffc450;fill-opacity:1;stroke:#000001;stroke-width:0.12;stroke-linejoin:round;stroke-dasharray:none"
+       x="35.707691"
+       y="42.116238"
+       id="text186"><tspan
+         sodipodi:role="line"
+         id="tspan184"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'DejaVu Sans';-inkscape-font-specification:'DejaVu Sans Bold';fill:#ffc450;fill-opacity:1;stroke-width:0.12;stroke-linejoin:round;stroke-dasharray:none"
+         x="35.707691"
+         y="42.116238">MW</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:3.175px;font-family:'DejaVu Sans';-inkscape-font-specification:'DejaVu Sans Bold';fill:#ffc450;fill-opacity:1;stroke:#000001;stroke-width:0.12;stroke-linejoin:round;stroke-dasharray:none"
+       x="38.070339"
+       y="45.042355"
+       id="text240"><tspan
+         sodipodi:role="line"
+         id="tspan238"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'DejaVu Sans';-inkscape-font-specification:'DejaVu Sans Bold';fill:#ffc450;fill-opacity:1;stroke-width:0.12;stroke-linejoin:round;stroke-dasharray:none"
+         x="38.070339"
+         y="45.042355">21</tspan></text>
+    <path
+       style="fill:none;fill-opacity:1;stroke:#6e4c06;stroke-width:0.613;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#TriangleStart)"
+       id="path2055"
+       sodipodi:type="arc"
+       sodipodi:cx="44.184536"
+       sodipodi:cy="36.125626"
+       sodipodi:rx="1.1262935"
+       sodipodi:ry="1.1262935"
+       sodipodi:start="5.3973262"
+       sodipodi:end="3.1638921"
+       sodipodi:open="true"
+       sodipodi:arc-type="arc"
+       d="m 44.897057,35.253358 a 1.1262935,1.1262935 0 0 1 0.29466,1.376375 1.1262935,1.1262935 0 0 1 -1.27838,0.589048 1.1262935,1.1262935 0 0 1 -0.854815,-1.118269"
+       transform="matrix(0,1,1,0,0,0)" />
+  </g>
+</svg>

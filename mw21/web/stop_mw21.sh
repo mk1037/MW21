@@ -40,3 +40,5 @@ PLAYVPL2_TRAP_PID_TO_STOP=$(head -1 $PLAYVPL2_TRAP_PID_PATH)
 kill -9 $PLAYVPL2_TRAP_PID_TO_STOP
 
 sleep 0.5
+
+rm ../mw2_config

@@ -23,9 +23,19 @@ VK_LABEL="Virtual Keyboard"
 
 sleep 0.3
 
+vkeybd &
+
+sleep 0.5
+
 VK_CLIENT=$( aconnect -l | grep client | grep -e "Virtual Keyboard" | awk '{ result=$2; gsub(":", "", result); print result; }' )
 
 MAIN_PR_CLIENT=$(get_client $MAIN_PR_CLIENT_LABEL)
 MAIN_PR_PORT_WRITE=$(get_midi_port $MAIN_PR_PORT_WRITE_LABEL)
 
 aconnect $VK_CLIENT:0 $MAIN_PR_CLIENT:$MAIN_PR_PORT_WRITE
+
+echo "When ready to close this window - press \"Ctrl+c\""
+
+while true; do
+  read variable1
+done
