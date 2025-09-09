@@ -41,7 +41,7 @@ createActivator()
   fi
 
   if [ $MW21_DESKTOP_ENVIRONMENT == "mate" ]; then
-    printf "#!/usr/bin/env xdg-open\n[Desktop Entry]\nVersion=1.0\nType=Application\nTerminal=false\nExec=$MW21_TERMINAL_BIN --working-directory=$MW2_DIR/mw21/web -x ./%s\nName=%sIcon=%s\n" $2 $1 $3 > $MW21_DESKTOP_DIR/$1.desktop
+    printf "#!/usr/bin/env xdg-open\n[Desktop Entry]\nVersion=1.0\nType=Application\nTerminal=false\nExec=$MW21_TERMINAL_BIN --working-directory=$MW2_DIR/mw21/web -x ./%s\nName=%s\nIcon=%s\n" $2 $1 $3 > $MW21_DESKTOP_DIR/$1.desktop
   fi
 
   [ -f $MW21_DESKTOP_DIR/$1.desktop ] && chmod 755 $MW21_DESKTOP_DIR/$1.desktop
