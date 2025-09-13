@@ -29,22 +29,24 @@ message()
 }
 
 #1 - name
-#2 - command
-#3 - icon path
+#2 - working directory
+#3 - command
+#4 - icon path
 
 createActivator()
 {
-  [ -f $MW21_DESKTOP_DIR/$1.desktop ] && rm $MW21_DESKTOP_DIR/$1.desktop
+  MW21_ACTIVATOR_FILE=$MW21_DESKTOP_DIR/$1.desktop
+  [ -f $MW21_ACTIVATOR_FILE ] && rm $MW21_ACTIVATOR_FILE
 
   if [ $MW21_DESKTOP_ENVIRONMENT == "xfce" ]; then
-    printf "[Desktop Entry]\nVersion=1.0\nType=Application\nName=%s\nComment=\nExec=$MW21_TERMINAL_BIN --working-directory=$MW2_DIR/mw21/web -x ./%s\nIcon=%s\nPath=\nTerminal=false\nStartupNotify=false\n" $1 $2 $3 > $MW21_DESKTOP_DIR/$1.desktop
+    printf "[Desktop Entry]\nVersion=1.0\nType=Application\nName=%s\nComment=\nExec=$MW21_TERMINAL_BIN --working-directory=%s -x ./%s\nIcon=%s\nPath=\nTerminal=false\nStartupNotify=false\n" $1 $2 $3 $4 > $MW21_ACTIVATOR_FILE
   fi
 
   if [ $MW21_DESKTOP_ENVIRONMENT == "mate" ]; then
-    printf "#!/usr/bin/env xdg-open\n[Desktop Entry]\nVersion=1.0\nType=Application\nTerminal=false\nExec=$MW21_TERMINAL_BIN --working-directory=$MW2_DIR/mw21/web -x ./%s\nName=%s\nIcon=%s\n" $2 $1 $3 > $MW21_DESKTOP_DIR/$1.desktop
+    printf "#!/usr/bin/env xdg-open\n[Desktop Entry]\nVersion=1.0\nType=Application\nTerminal=false\nExec=$MW21_TERMINAL_BIN --working-directory=%s -x ./%s\nName=%s\nIcon=%s\n" $2 $3 $1 $4 > $MW21_ACTIVATOR_FILE
   fi
 
-  [ -f $MW21_DESKTOP_DIR/$1.desktop ] && chmod 755 $MW21_DESKTOP_DIR/$1.desktop
+  [ -f $MW21_ACTIVATOR_FILE ] && chmod 755 $MW21_ACTIVATOR_FILE
 }
 
 MW2_DIR=$(pwd)
@@ -71,10 +73,15 @@ sudo apt-get install -y build-essential \
 
 message "Compiling MW21"
 
+message "Compiling chooser"
 cd $MW2_DIR/mw21/chooser/ ; make ; \
+message "Compiling display"
 cd $MW2_DIR/mw21/display/ ; make ; \
+message "Compiling proxy"
 cd $MW2_DIR/mw21/g_proxy/ ; make ; \
+message "Compiling modeline"
 cd $MW2_DIR/mw21/modeline/ ; make ; \
+message "Compiling remote"
 cd $MW2_DIR/mw21/remote/ ; make ; \
 cd $MW2_DIR
 
@@ -110,10 +117,9 @@ message "Creating desktop activators"
 
 MW21_DESKTOP_DIR=$(xdg-user-dir DESKTOP)
 
-createActivator "runMW21" run_mw21.sh $MW2_DIR/mw21/icons/runMW21.png
-createActivator "stopMW21" stop_mw21.sh $MW2_DIR/mw21/icons/stopMW21.png
-createActivator "reconnectMW21" reconnect.sh $MW2_DIR/mw21/icons/reconnectMW21.png
-createActivator "keyboardMW21" vk.sh $MW2_DIR/mw21/icons/keyboardMW21.png
-createActivator "placeMW21" place_windows.sh $MW2_DIR/mw21/icons/placeMW21.png
-#createActivator "collectionMW21" collection.sh $MW2_DIR/mw21/icons/collectionMW21.png
-
+createActivator "runMW21" $MW2_DIR/mw21/web run_mw21.sh $MW2_DIR/mw21/icons/runMW21.png
+createActivator "stopMW21" $MW2_DIR/mw21/web stop_mw21.sh $MW2_DIR/mw21/icons/stopMW21.png
+createActivator "reconnectMW21" $MW2_DIR/mw21/web reconnect.sh $MW2_DIR/mw21/icons/reconnectMW21.png
+createActivator "keyboardMW21" $MW2_DIR/mw21/web vk.sh $MW2_DIR/mw21/icons/keyboardMW21.png
+createActivator "placeMW21" $MW2_DIR/mw21/web place_windows.sh $MW2_DIR/mw21/icons/placeMW21.png
+createActivator "collectionMW21" $MW2_DIR collection.sh $MW2_DIR/mw21/icons/collectionMW21.png

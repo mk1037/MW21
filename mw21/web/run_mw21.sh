@@ -55,7 +55,8 @@ echo "Initializing directory $COMMON_DIRECTORY"
 ./data_check.sh
 
 if [ "$?" != "0" ]; then
-  echo "Incorrect data, exiting rrun ..."
+  echo "Incorrect data. Check your collection. Exiting. Press ENTER"
+  read variable1
   exit 1;
 fi
 

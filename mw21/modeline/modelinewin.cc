@@ -42,6 +42,7 @@ ModelineWin::ModelineWin(ModelineConfig *pconfig)
 //   std::cout << "Window height is " << modelineConfig->getModelineAreaHeight() * 2 + 5 << std::endl;
   theme_idx = 2;
   title_b = "";
+  empty_str = "";
   sensitive_actions_lock = false;
   m_prompt_1_theme = THEME_NEUTRAL_2;
   m_prompt_2_theme = THEME_NEUTRAL_2;
@@ -96,8 +97,8 @@ int ModelineWin::initialize()
   timeoutClient = new TimeoutClient(modelineConfig->getTimeout());
 
   // compute dimensions of the areas
-  prompt_width = (unsigned int)( (((float)modelineConfig->getModelineAreaWidth()) * 0.08f) );
-  side_item_width = (unsigned int)( (((float)modelineConfig->getModelineAreaWidth()) * 0.01f) );
+  prompt_width = (unsigned int)( (((float)modelineConfig->getModelineAreaWidth()) * 0.09f) );
+  side_item_width = (unsigned int)( (((float)modelineConfig->getModelineAreaWidth()) * 0.005f) );
   item_width = modelineConfig->getModelineAreaWidth() - (2 * side_item_width + prompt_width);
   
 //   std::cout << "prompt_width: " << prompt_width << " side_item_width: " << side_item_width
@@ -522,7 +523,7 @@ void ModelineWin::update_widgets()
   }
 
   m_prompt_1->render_string(t_str2, false);
-  m_prev->render_string(prev_item, true);
+  m_prev->render_string(empty_str, true);
   
   if(character != 0)
   {
@@ -606,7 +607,7 @@ void ModelineWin::update_widgets()
     m_curr->render_string(to_display, false);
   }
 
-  m_next->render_string(next_item, true);
+  m_next->render_string(empty_str, true);
 
   m_prompt_2->render_string(t_str3, false);
 }

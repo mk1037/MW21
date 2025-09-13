@@ -107,6 +107,7 @@ private:
   Glib::Threads::Thread *signal_client_thread;
 
   Glib::ustring title_b;
+  Glib::ustring empty_str = "";
 
   unsigned int prompt_width, side_item_width, item_width;
 

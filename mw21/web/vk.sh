@@ -34,8 +34,7 @@ MAIN_PR_PORT_WRITE=$(get_midi_port $MAIN_PR_PORT_WRITE_LABEL)
 
 aconnect $VK_CLIENT:0 $MAIN_PR_CLIENT:$MAIN_PR_PORT_WRITE
 
-echo "When ready to close this window - press \"Ctrl+c\""
+echo "When ready to close this window - press ENTER"
 
-while true; do
-  read variable1
-done
+read variable1
+
