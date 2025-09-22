@@ -42,6 +42,10 @@ createActivator()
     printf "[Desktop Entry]\nVersion=1.0\nType=Application\nName=%s\nComment=\nExec=$MW21_TERMINAL_BIN --working-directory=%s -x ./%s\nIcon=%s\nPath=\nTerminal=false\nStartupNotify=false\n" $1 $2 $3 $4 > $MW21_ACTIVATOR_FILE
   fi
 
+  if [ $MW21_DESKTOP_ENVIRONMENT == "cinnamon" ]; then
+    printf "#!/usr/bin/env xdg-open\n[Desktop Entry]\nVersion=1.0\nType=Application\nTerminal=false\nExec=$MW21_TERMINAL_BIN --window --working-directory=%s -x ./%s\nName=%s\nIcon=%s\n" $2 $3 $1 $4 > $MW21_ACTIVATOR_FILE
+  fi
+
   if [ $MW21_DESKTOP_ENVIRONMENT == "mate" ]; then
     printf "#!/usr/bin/env xdg-open\n[Desktop Entry]\nVersion=1.0\nType=Application\nTerminal=false\nExec=$MW21_TERMINAL_BIN --working-directory=%s -x ./%s\nName=%s\nIcon=%s\n" $2 $3 $1 $4 > $MW21_ACTIVATOR_FILE
   fi
@@ -90,15 +94,22 @@ message "Determine desktop environment"
 MW21_DESKTOP_ENVIRONMENT="mate"
 MW21_TERMINAL_BIN="mate-terminal"
 
+
+
 echo $XDG_CURRENT_DESKTOP | grep -q -i xfce
 MW21_IS_XFCE=$?
 if [ $MW21_IS_XFCE -eq 0 ]; then
   MW21_DESKTOP_ENVIRONMENT="xfce"
-fi
-
-if [ $MW21_DESKTOP_ENVIRONMENT == "xfce" ]; then
   MW21_TERMINAL_BIN="xfce4-terminal"
 fi
+
+echo $XDG_CURRENT_DESKTOP | grep -q -i Cinnamon
+MW21_IS_CINNAMON=$?
+if [ $MW21_IS_CINNAMON -eq 0 ]; then
+  MW21_DESKTOP_ENVIRONMENT="cinnamon"
+  MW21_TERMINAL_BIN="gnome-terminal"
+fi
+
 
 message "Modifying configs"
 
