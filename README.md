@@ -5,6 +5,8 @@ MW21 is a simple karaoke / stage-prompter application for singers and amateur mu
 
 ![MW21 playing](mw21/pictures/MW21_playing.png)
 
+Video tutorials: [https://www.youtube.com/@mk-1037](https://www.youtube.com/@mk-1037)
+
 It's designed to run on GNU/Linux operating system. Currently - installation scripts are designed for debian-based systems with `XFCE`/`Mate` desktop.
 
 In fact - `MW21` is a bundle of applications and scripts communicating  via `alsa` midi and inter-process communications (signals).
