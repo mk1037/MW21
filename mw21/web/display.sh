@@ -17,21 +17,11 @@
 # You should have received a copy of the GNU General Public License
 # along with MW21.  If not, see <http://www.gnu.org/licenses/>.
 
+./install_configs.sh
+
 . ./scripts_config.sh
 
-VK_LABEL="Virtual Keyboard"
+cp ../mw2_config /tmp/mw2_config
 
-sleep 0.3
-
-vkeybd &
-
-sleep 1
-
-VK_CLIENT=$( aconnect -l | grep client | grep -e "Virtual Keyboard" | awk '{ result=$2; gsub(":", "", result); print result; }' )
-
-MAIN_PR_CLIENT=$(get_client $MAIN_PR_CLIENT_LABEL)
-MAIN_PR_PORT_WRITE=$(get_midi_port $MAIN_PR_PORT_WRITE_LABEL)
-
-aconnect $VK_CLIENT:0 $MAIN_PR_CLIENT:$MAIN_PR_PORT_WRITE
-
+../display/midi_display
 

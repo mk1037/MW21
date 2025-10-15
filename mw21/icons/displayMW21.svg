@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="7.6771884mm"
+   height="6.098248mm"
+   viewBox="0 0 7.6771884 6.098248"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
+   sodipodi:docname="displayMW21.svg"
+   inkscape:export-filename="/home/live/MW21/mw21/icons/displayMW21.png"
+   inkscape:export-xdpi="273.73999"
+   inkscape:export-ydpi="273.73999"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="true"
+     inkscape:zoom="5.6568543"
+     inkscape:cx="24.483572"
+     inkscape:cy="22.097087"
+     inkscape:window-width="1280"
+     inkscape:window-height="967"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1"
+     inkscape:pageshadow="2"
+     inkscape:snap-global="false">
+    <inkscape:grid
+       type="xygrid"
+       id="grid1097"
+       originx="-34.652894"
+       originy="-39.741651" />
+  </sodipodi:namedview>
+  <defs
+     id="defs2">
+    <marker
+       style="overflow:visible"
+       id="Arrow1Lstart"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true">
+      <path
+         transform="scale(0.8) translate(12.5,0)"
+         style="fill-rule:evenodd;fill:context-stroke;stroke:context-stroke;stroke-width:1.0pt"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         id="path5098" />
+    </marker>
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-34.652895,-39.74165)">
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:3.175px;font-family:'DejaVu Sans';-inkscape-font-specification:'DejaVu Sans Bold';fill:#07e6ff;fill-opacity:1;stroke:#000000;stroke-width:0.12;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+       x="35.707691"
+       y="42.116238"
+       id="text186"><tspan
+         id="tspan184"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'DejaVu Sans';-inkscape-font-specification:'DejaVu Sans Bold';fill:#07e6ff;fill-opacity:1;stroke-width:0.12;stroke-linejoin:round;stroke-dasharray:none;stroke:#000000;stroke-opacity:1"
+         x="35.707691"
+         y="42.116238"
+         sodipodi:role="line">MW</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:3.175px;font-family:'DejaVu Sans';-inkscape-font-specification:'DejaVu Sans Bold';fill:#07e6ff;fill-opacity:1;stroke:#000000;stroke-width:0.12;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+       x="38.070339"
+       y="45.042355"
+       id="text240"><tspan
+         sodipodi:role="line"
+         id="tspan238"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'DejaVu Sans';-inkscape-font-specification:'DejaVu Sans Bold';fill:#07e6ff;fill-opacity:1;stroke-width:0.12;stroke-linejoin:round;stroke-dasharray:none;stroke:#000000;stroke-opacity:1"
+         x="38.070339"
+         y="45.042355">21</tspan></text>
+    <path
+       style="fill:#909090;fill-opacity:1;stroke:#000000;stroke-width:0.785758;stroke-linecap:square;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:stroke markers fill"
+       d="m 35.285796,43.538655 v -0.411573 h 2.38125 v 1.852083 h -2.38125 v -1.852083 h 0.432955"
+       id="path2443"
+       sodipodi:nodetypes="ccccccc" />
+    <path
+       style="fill:#f1f1f1;fill-opacity:1;stroke:none;stroke-width:0;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 36.029004,43.42538 c 0.381761,-0.02644 1.011699,-0.08687 1.32152,0.0141 0.139267,0.241509 0.155706,0.401468 0.08269,0.706934 0.0029,-0.403724 -0.135364,-0.50903 -0.188854,-0.572544 -0.254987,-0.121758 -0.638879,-0.102264 -1.215352,-0.148451 z"
+       id="path4832"
+       sodipodi:nodetypes="cccccc" />
+  </g>
+</svg>
