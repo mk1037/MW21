@@ -70,6 +70,8 @@ private:
   unsigned int ctrlNum4Bw;
   unsigned int ctrlVal4Bw;
 
+  unsigned int ctrlNumGroupSel;
+
   unsigned int noteRead;
   unsigned int velRead;
   unsigned int noteBack;
@@ -132,6 +134,8 @@ public:
   unsigned int getCtrlVal4Fw();
   unsigned int getCtrlNum4Bw();
   unsigned int getCtrlVal4Bw();
+
+  unsigned int getCtrlNumGroupSel();
 
   unsigned int getNoteRead();
   unsigned int getVelRead();

@@ -32,6 +32,7 @@ class MidiClient
       unsigned int p_note_lt, unsigned int p_vel_geq, unsigned int p_vel_lt,
       unsigned int p_ctrl_num_4fw, unsigned int p_ctrl_val_4fw,
       unsigned int p_ctrl_num_4bw, unsigned int p_ctrl_val_4bw,
+      unsigned int p_ctrl_num_group_sel,
       unsigned int p_note_read, unsigned int p_vel_read,
       unsigned int p_note_back, unsigned int p_vel_back,
       unsigned int p_note_theme_1, unsigned int p_vel_theme_1,
@@ -44,7 +45,7 @@ class MidiClient
     void listen(DisplayWin * caller);
     void stop_work();
     bool has_stopped() const;
-    void get_data(bool *read_text, unsigned int *p_theme_id, bool *p_go_back, bool *p_increment, bool *p_4fw, bool *p_4bw, bool *p_home, unsigned int *p_pckbd_action) const;
+    void get_data(bool *read_text, unsigned int *p_theme_id, bool *p_go_back, bool *p_increment, bool *p_4fw, bool *p_4bw, bool *p_home, unsigned int *p_pckbd_action, bool *p_select_group, unsigned int *p_group) const;
     void open_client();
     bool get_client_success_info();
     void new_port_write();
@@ -67,6 +68,7 @@ class MidiClient
     unsigned int ctrl_val_4fw;
     unsigned int ctrl_num_4bw;
     unsigned int ctrl_val_4bw;
+    unsigned int ctrl_num_group_sel;
     unsigned int note_read;
     unsigned int vel_read;
     unsigned int note_back;
@@ -89,6 +91,8 @@ class MidiClient
     unsigned int m_pckbd_action;
     bool m_4fw;
     bool m_4bw;
+    unsigned int m_group;
+    bool m_select_group;
 };
 
 #endif // DISPLAY_MIDICLIENT_H

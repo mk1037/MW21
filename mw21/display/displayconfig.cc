@@ -90,6 +90,7 @@ DisplayConfig::DisplayConfig() {
   ctrlVal4Fw        = 127;
   ctrlNum4Bw        = 80;
   ctrlVal4Bw        = 127;
+  ctrlNumGroupSel   = 20;
 
   noteRead          = 3;
   velRead           = 1;
@@ -285,6 +286,11 @@ unsigned int DisplayConfig::getCtrlNum4Bw()
 unsigned int DisplayConfig::getCtrlVal4Bw()
 {
   return ctrlVal4Bw;
+}
+
+unsigned int DisplayConfig::getCtrlNumGroupSel()
+{
+  return ctrlNumGroupSel;
 }
 
 unsigned int DisplayConfig::getNoteRead()
@@ -485,6 +491,8 @@ int DisplayConfig::readConfig(Glib::ustring filename, bool colorsOnly)
   ctrlVal4Fw = atoi(keyfile.get_value("MAIN", "ctrlVal4Fw").c_str());
   ctrlNum4Bw = atoi(keyfile.get_value("MAIN", "ctrlNum4Bw").c_str());
   ctrlVal4Bw = atoi(keyfile.get_value("MAIN", "ctrlVal4Bw").c_str());
+
+  ctrlNumGroupSel = atoi(keyfile.get_value("MAIN", "ctrlNumGroupSel").c_str());
 
   noteRead = atoi(keyfile.get_value("MAIN", "noteRead").c_str());
   velRead = atoi(keyfile.get_value("MAIN", "velRead").c_str());

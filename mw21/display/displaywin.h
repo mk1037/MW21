@@ -83,6 +83,8 @@ private:
   bool dec4;
   unsigned int pckbd_action;
   bool pckbd_enabled;
+  bool select_group;
+  unsigned int group;
   FT_Face       face;
   FT_Library    library;
   unsigned char *fontBuffer;

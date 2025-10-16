@@ -202,6 +202,7 @@ void DisplayWin::start_listen()
                           displayConfig->getVelGEQ(), displayConfig->getVelLT(),
                           displayConfig->getCtrlNum4Fw(), displayConfig->getCtrlVal4Fw(),
                           displayConfig->getCtrlNum4Bw(), displayConfig->getCtrlVal4Bw(),
+                          displayConfig->getCtrlNumGroupSel(),
                           displayConfig->getNoteRead(), displayConfig->getVelRead(),
                           displayConfig->getNoteBack(), displayConfig->getVelBack(),
                           displayConfig->getNoteTheme1(), displayConfig->getVelTheme1(),
@@ -522,7 +523,7 @@ void DisplayWin::update_widgets(bool only_refresh)
   }
   unsigned int t_theme_id = color_theme;
 
-  client->get_data(&m_read_text_file, &color_theme, &go_back, &increment, &inc4, &dec4, &home, &pckbd_action);
+  client->get_data(&m_read_text_file, &color_theme, &go_back, &increment, &inc4, &dec4, &home, &pckbd_action, &select_group, &group);
 
   if(t_theme_id != color_theme)
   {
@@ -552,6 +553,15 @@ void DisplayWin::update_widgets(bool only_refresh)
     home = false;
     queue.unset_reached_end();
     queue.set_pointer(-1);
+    frame = queue.get_frame();
+    render_frame();
+    set_title_label();
+    return;
+  }
+  if(select_group)
+  {
+    queue.unset_reached_end();
+    queue.set_group_pointer((int)group - 1);
     frame = queue.get_frame();
     render_frame();
     set_title_label();

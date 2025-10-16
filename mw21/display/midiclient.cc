@@ -24,6 +24,7 @@ MidiClient::MidiClient( unsigned int p_channel, unsigned int p_note_geq,
     unsigned int p_note_lt, unsigned int p_vel_geq, unsigned int p_vel_lt,
     unsigned int p_ctrl_num_4fw, unsigned int p_ctrl_val_4fw,
     unsigned int p_ctrl_num_4bw, unsigned int p_ctrl_val_4bw,
+    unsigned int p_ctrl_num_group_sel,
     unsigned int p_note_read, unsigned int p_vel_read,
     unsigned int p_note_back, unsigned int p_vel_back,
     unsigned int p_note_theme_1, unsigned int p_vel_theme_1,
@@ -47,6 +48,7 @@ MidiClient::MidiClient( unsigned int p_channel, unsigned int p_note_geq,
   ctrl_val_4fw(p_ctrl_val_4fw),
   ctrl_num_4bw(p_ctrl_num_4bw),
   ctrl_val_4bw(p_ctrl_val_4bw),
+  ctrl_num_group_sel(p_ctrl_num_group_sel),
   note_read(p_note_read),
   vel_read(p_vel_read),
   note_back(p_note_back),
@@ -100,7 +102,7 @@ int MidiClient::get_port()
   return port_id;
 }
 
-void MidiClient::get_data(bool *read_text, unsigned int *p_theme_id, bool *p_go_back, bool *p_increment, bool *p_4fw, bool *p_4bw, bool *p_home, unsigned int *p_pckbd_action) const
+void MidiClient::get_data(bool *read_text, unsigned int *p_theme_id, bool *p_go_back, bool *p_increment, bool *p_4fw, bool *p_4bw, bool *p_home, unsigned int *p_pckbd_action, bool *p_select_group, unsigned int *p_group) const
 {
   Glib::Threads::Mutex::Lock lock(m_Mutex);
   *read_text = m_read_text;
@@ -111,6 +113,8 @@ void MidiClient::get_data(bool *read_text, unsigned int *p_theme_id, bool *p_go_
   *p_4bw = m_4bw;
   *p_home = m_home;
   *p_pckbd_action = m_pckbd_action;
+  *p_select_group = m_select_group;
+  *p_group = m_group;
 }
 
 void MidiClient::stop_work()
@@ -169,6 +173,8 @@ void MidiClient::listen(DisplayWin * caller)
       m_pckbd_action = 0;
       m_4fw = false;
       m_4bw = false;
+      m_select_group = false;
+      m_group = 0;
       caller->notify();
     }
     if ( ev->type == SND_SEQ_EVENT_NOTEON && (ev->data).note.channel == channel &&
@@ -183,6 +189,8 @@ void MidiClient::listen(DisplayWin * caller)
       m_pckbd_action = 0;
       m_4fw = false;
       m_4bw = false;
+      m_select_group = false;
+      m_group = 0;
       caller->notify();
     }
     if ( ev->type == SND_SEQ_EVENT_NOTEON && (ev->data).note.channel == channel &&
@@ -198,6 +206,8 @@ void MidiClient::listen(DisplayWin * caller)
       m_pckbd_action = 0;
       m_4fw = false;
       m_4bw = false;
+      m_select_group = false;
+      m_group = 0;
       caller->notify();
     }
     if ( ev->type == SND_SEQ_EVENT_NOTEON && (ev->data).note.channel == channel &&
@@ -213,6 +223,8 @@ void MidiClient::listen(DisplayWin * caller)
       m_pckbd_action = 0;
       m_4fw = false;
       m_4bw = false;
+      m_select_group = false;
+      m_group = 0;
       caller->notify();
     }
     if ( ev->type == SND_SEQ_EVENT_NOTEON && (ev->data).note.channel == channel &&
@@ -228,6 +240,8 @@ void MidiClient::listen(DisplayWin * caller)
       m_pckbd_action = 0;
       m_4fw = false;
       m_4bw = false;
+      m_select_group = false;
+      m_group = 0;
       caller->notify();
     }
     if ( ev->type == SND_SEQ_EVENT_NOTEON && (ev->data).note.channel == channel &&
@@ -242,6 +256,8 @@ void MidiClient::listen(DisplayWin * caller)
       m_pckbd_action = 0;
       m_4fw = false;
       m_4bw = false;
+      m_select_group = false;
+      m_group = 0;
       caller->notify();
     }
     if ( ev->type == SND_SEQ_EVENT_NOTEON && (ev->data).note.channel == channel &&
@@ -256,6 +272,8 @@ void MidiClient::listen(DisplayWin * caller)
       m_pckbd_action = 0;
       m_4fw = false;
       m_4bw = false;
+      m_select_group = false;
+      m_group = 0;
       caller->notify();
     }
     if ( ev->type == SND_SEQ_EVENT_NOTEON && (ev->data).note.channel == channel &&
@@ -270,6 +288,8 @@ void MidiClient::listen(DisplayWin * caller)
       m_pckbd_action = 1;
       m_4fw = false;
       m_4bw = false;
+      m_select_group = false;
+      m_group = 0;
       caller->notify();
     }
     if ( ev->type == SND_SEQ_EVENT_NOTEON && (ev->data).note.channel == channel &&
@@ -284,6 +304,8 @@ void MidiClient::listen(DisplayWin * caller)
       m_pckbd_action = 2;
       m_4fw = false;
       m_4bw = false;
+      m_select_group = false;
+      m_group = 0;
       caller->notify();
     }
     if ( ev->type == SND_SEQ_EVENT_CONTROLLER && (ev->data).control.channel == channel &&
@@ -312,6 +334,24 @@ void MidiClient::listen(DisplayWin * caller)
       m_pckbd_action = 0;
       m_4fw = false;
       m_4bw = true;
+      m_select_group = false;
+      m_group = 0;
+      caller->notify();
+    }
+    if ( ev->type == SND_SEQ_EVENT_CONTROLLER && (ev->data).control.channel == channel &&
+        ( ev->data ).control.param == ctrl_num_group_sel )
+    {
+//       std::cout << "Received a controller: channel = " << (int)( ev->data ).control.channel
+//         << " controller number = " << (int)( ev->data ).control.param << " value " << (int)( ev->data ).control.value << std::endl;
+      m_home = false;
+      m_increment = false;
+      m_go_back = false;
+      m_read_text = false;
+      m_pckbd_action = 0;
+      m_4fw = false;
+      m_4bw = false;
+      m_select_group = true;
+      m_group = (unsigned int)( ev->data ).control.value;
       caller->notify();
     }
   }

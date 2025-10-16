@@ -77,6 +77,7 @@ ctrlNum4Fw             = 81
 ctrlVal4Fw             = 127
 ctrlNum4Bw             = 80
 ctrlVal4Bw             = 127
+ctrlNumGroupSel        = 20
 
 noteRead               = 4
 velRead                = 1
