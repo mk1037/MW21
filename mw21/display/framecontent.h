@@ -25,16 +25,23 @@
 #include <gtkmm.h>
 #include <iostream>
 
+enum LineState
+{
+  INACTIVE,
+  ACTIVE,
+  VISITED
+};
+
 class FrameContent
 {
   public:
     FrameContent();
     Glib::ustring left[LINES_NUM];
     Glib::ustring right[LINES_NUM];
-    bool is_active[LINES_NUM];
+    int state[LINES_NUM];
     bool is_hint[LINES_NUM];
     void print();
-    void set_content(int index, Glib::ustring p_left, Glib::ustring p_right, bool p_active, bool p_hint);
+    void set_content(int index, Glib::ustring p_left, Glib::ustring p_right, int p_state, bool p_hint);
 };
 
 #endif // DISPLAY_DISPLAYWIN_H

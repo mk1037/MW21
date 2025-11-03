@@ -37,6 +37,12 @@ DisplayConfig::DisplayConfig() {
   inactiveLyricsOutlineColor[0] = "000000";
   inactiveHintsColor[0]      = "848484";
   inactiveHintsOutlineColor[0] = "202020";
+  visitedBackgroundColor[0]    = "e4e4e4";
+  visitedHintsBackgroundColor[0] = "343434";
+  visitedLyricsColor[0]        = "ffffff";
+  visitedLyricsOutlineColor[0] = "000000";
+  visitedHintsColor[0]         = "848484";
+  visitedHintsOutlineColor[0]  = "202020";
 
   backgroundColor[1]        = "e4e424";
   sungBackgroundColor[1]    = "f4f422";
@@ -54,6 +60,12 @@ DisplayConfig::DisplayConfig() {
   inactiveLyricsOutlineColor[1] = "000000";
   inactiveHintsColor[1]      = "848484";
   inactiveHintsOutlineColor[1] = "202020";
+  visitedBackgroundColor[1]    = "e4e424";
+  visitedHintsBackgroundColor[1] = "343424";
+  visitedLyricsColor[1]        = "ffff2f";
+  visitedLyricsOutlineColor[1] = "000020";
+  visitedHintsColor[1]         = "848424";
+  visitedHintsOutlineColor[1]  = "f02020";
 
   backgroundColor[2]        = "34e4a4";
   sungBackgroundColor[2]    = "f4f422";
@@ -71,6 +83,12 @@ DisplayConfig::DisplayConfig() {
   inactiveLyricsOutlineColor[2] = "000000";
   inactiveHintsColor[2]      = "848484";
   inactiveHintsOutlineColor[2] = "202020";
+  visitedBackgroundColor[2]    = "34e4a4";
+  visitedHintsBackgroundColor[2] = "343424";
+  visitedLyricsColor[2]        = "ffff2f";
+  visitedLyricsOutlineColor[2] = "000020";
+  visitedHintsColor[2]         = "848424";
+  visitedHintsOutlineColor[2]  = "f02020";
 
   outlineWidth           = 0.7;
   fontDirPrefix          = "/usr/share/fonts/truetype/dejavu/";
@@ -208,6 +226,44 @@ Glib::ustring DisplayConfig::getInactiveHintsOutlineColor(unsigned int p_idx)
   return inactiveHintsOutlineColor[0];
 }
 
+
+
+
+Glib::ustring DisplayConfig::getVisitedBackgroundColor(unsigned int p_idx)
+{
+  if(p_idx < THEMES_NUM) return visitedBackgroundColor[p_idx];
+  return visitedBackgroundColor[0];
+}
+
+Glib::ustring DisplayConfig::getVisitedHintsBackgroundColor(unsigned int p_idx)
+{
+  if(p_idx < THEMES_NUM) return visitedHintsBackgroundColor[p_idx];
+  return visitedHintsBackgroundColor[0];
+}
+
+Glib::ustring DisplayConfig::getVisitedLyricsColor(unsigned int p_idx)
+{
+  if(p_idx < THEMES_NUM) return visitedLyricsColor[p_idx];
+  return visitedLyricsColor[0];
+}
+
+Glib::ustring DisplayConfig::getVisitedLyricsOutlineColor(unsigned int p_idx)
+{
+  if(p_idx < THEMES_NUM) return visitedLyricsOutlineColor[p_idx];
+  return visitedLyricsOutlineColor[0];
+}
+
+Glib::ustring DisplayConfig::getVisitedHintsColor(unsigned int p_idx)
+{
+  if(p_idx < THEMES_NUM) return visitedHintsColor[p_idx];
+  return visitedHintsColor[0];
+}
+
+Glib::ustring DisplayConfig::getVisitedHintsOutlineColor(unsigned int p_idx)
+{
+  if(p_idx < THEMES_NUM) return visitedHintsOutlineColor[p_idx];
+  return visitedHintsOutlineColor[0];
+}
 
 
 
@@ -416,6 +472,15 @@ Glib::ustring DisplayConfig::getNamedColor(Glib::ustring p_inheritLabel, unsigne
   if ( p_inheritLabel == "inactiveHintsColor" ) return getInactiveHintsColor(p_th_idx);
   if ( p_inheritLabel == "inactiveHintsOutlineColor" ) getInactiveHintsOutlineColor (p_th_idx);
 
+
+  if ( p_inheritLabel == "visitedBackgroundColor" ) return getVisitedBackgroundColor(p_th_idx);
+  if ( p_inheritLabel == "visitedHintsBackgroundColor" ) return getVisitedHintsBackgroundColor(p_th_idx);
+  if ( p_inheritLabel == "visitedLyricsColor" ) return getVisitedLyricsColor(p_th_idx);
+  if ( p_inheritLabel == "visitedLyricsOutlineColor" ) return getVisitedLyricsOutlineColor(p_th_idx);
+  if ( p_inheritLabel == "visitedHintsColor" ) return getVisitedHintsColor(p_th_idx);
+  if ( p_inheritLabel == "visitedHintsOutlineColor" ) return getVisitedHintsOutlineColor(p_th_idx);
+
+
   std::cout << "WARNING!!! Couldn't get color for label '" << p_inheritLabel << p_th_idx << "'" << std::endl;
 
   return "FFFF00";
@@ -469,6 +534,17 @@ int DisplayConfig::readConfig(Glib::ustring filename, bool colorsOnly)
 
     readNonMandatoryParameter(&inactiveHintsColor[i], keyfile, "inactiveHintsColor" + indexStream.str(), "hintsColor", i);
     readNonMandatoryParameter(&inactiveHintsOutlineColor[i], keyfile, "inactiveHintsOutlineColor" + indexStream.str(), "hintsOutlineColor", i);
+
+
+    readNonMandatoryParameter(&visitedBackgroundColor[i], keyfile, "visitedBackgroundColor" + indexStream.str(), "backgroundColor", i);
+    readNonMandatoryParameter(&visitedHintsBackgroundColor[i], keyfile, "visitedHintsBackgroundColor" + indexStream.str(), "hintsBackgroundColor", i);
+
+    readNonMandatoryParameter(&visitedLyricsColor[i], keyfile, "visitedLyricsColor" + indexStream.str(), "sungLyricsColor", i);
+    readNonMandatoryParameter(&visitedLyricsOutlineColor[i], keyfile, "visitedLyricsOutlineColor" + indexStream.str(), "sungLyricsOutlineColor", i);
+
+    readNonMandatoryParameter(&visitedHintsColor[i], keyfile, "visitedHintsColor" + indexStream.str(), "activeHintsColor", i);
+    readNonMandatoryParameter(&visitedHintsOutlineColor[i], keyfile, "visitedHintsOutlineColor" + indexStream.str(), "activeHintsOutlineColor", i);
+
   }
   
   if (colorsOnly) return 0;

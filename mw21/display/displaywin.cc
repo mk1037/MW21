@@ -273,7 +273,7 @@ void DisplayWin::render_frame()
     displayArea[i]->set_color_theme(color_theme);
     displayArea[i]->initialize();
 //     m_VBox->pack_start(*displayArea[i]);
-    displayArea[i]->render_string(frame.left[i], frame.right[i], frame.is_active[i], frame.is_hint[i]);
+    displayArea[i]->render_string(frame.left[i], frame.right[i], frame.state[i], frame.is_hint[i]);
     displayArea[i]->show();
   }
 }

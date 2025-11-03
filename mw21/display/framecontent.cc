@@ -26,18 +26,18 @@ FrameContent::FrameContent()
     left[i] = "";
     right[i] = "";
     is_hint[i] = false;
-    is_active[i] = false;
+    state[i] = INACTIVE;
   }
 }
 
-void FrameContent::set_content(int index, Glib::ustring p_left, Glib::ustring p_right, bool p_active, bool p_hint)
+void FrameContent::set_content(int index, Glib::ustring p_left, Glib::ustring p_right, int p_state, bool p_hint)
 {
   if (index < 0) index = -index;
   index = index % 4;
 
   left[index] = p_left;
   right[index] = p_right;
-  is_active[index] = p_active;
+  state[index] = p_state;
   is_hint[index] = p_hint;
 }
 
@@ -49,7 +49,8 @@ void FrameContent::print()
   {
     if(is_hint[i]) std::cout << "~";
     else std::cout << " ";
-    if(is_active[i]) std::cout << ">";
+    if(state[i] == ACTIVE) std::cout << ">";
+    else if (state[i] == VISITED) std::cout << "x";
     else std::cout << " ";
 
     std::cout << left[i] << "|" << right[i] << std::endl;

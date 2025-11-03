@@ -32,7 +32,7 @@ class DisplayArea : public Gtk::DrawingArea
 public:
   DisplayArea(FT_Library *p_lib, FT_Face *p_face, unsigned int p_theme = 0);
   virtual ~DisplayArea();
-  void render_string(Glib::ustring &left, Glib::ustring &right, bool background_active = false, bool is_hint = false);
+  void render_string(Glib::ustring &left, Glib::ustring &right, int p_state = INACTIVE, bool is_hint = false);
   void set_config(DisplayConfig *pconfig);
   void initialize();
   void set_color_theme(int p_idx);
@@ -43,7 +43,7 @@ public:
   void set_pixel(Glib::RefPtr<Gdk::Pixbuf> where, Pixel32 *pixel, int x, int y);
   void set_pixel(Pixel32 *pixel, int x, int y);
   void Print(int bytesize);
-  void render_glyph(gunichar ch, bool is_active, bool on_active_background);
+  void render_glyph(gunichar ch, int p_font_R, int p_font_G, int p_font_B, int p_outline_R, int p_outline_G, int p_outline_B);
 
 protected:
   //Override default signal handler:

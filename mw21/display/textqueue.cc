@@ -431,10 +431,10 @@ FrameContent TextQueue::get_frame()
     result.is_hint[2] = true;
     result.is_hint[3] = true;
 
-    result.is_active[0] = false;
-    result.is_active[1] = false;
-    result.is_active[2] = false;
-    result.is_active[3] = false;
+    result.state[0] = INACTIVE;
+    result.state[1] = INACTIVE;
+    result.state[2] = INACTIVE;
+    result.state[3] = INACTIVE;
 
     return result;
   }
@@ -444,25 +444,25 @@ FrameContent TextQueue::get_frame()
   {
     result.set_content(0, (it+line_pointer)->get_left(chunk_pointer),
                        (it+line_pointer)->get_right(chunk_pointer),
-                       chunk_pointer >= 0 ? true : false,
+                       chunk_pointer < 0 && line_pointer == 0 ? INACTIVE : ACTIVE,
                        (it+line_pointer)->get_hint() );
     if(line_pointer + 1 < lines_num())
     {
     result.set_content(1, (it+line_pointer+1)->get_left(-1),
                        (it+line_pointer+1)->get_right(-1),
-                       false, (it+line_pointer+1)->get_hint() );
+                       INACTIVE, (it+line_pointer+1)->get_hint() );
     }
     if(line_pointer + 2 < lines_num())
     {
     result.set_content(2, (it+line_pointer+2)->get_left(-1),
                        (it+line_pointer+2)->get_right(-1),
-                       false, (it+line_pointer+2)->get_hint() );
+                       INACTIVE, (it+line_pointer+2)->get_hint() );
     }
     if(line_pointer + 3 < lines_num())
     {
     result.set_content(3, (it+line_pointer+3)->get_left(-1),
                        (it+line_pointer+3)->get_right(-1),
-                       false, (it+line_pointer+3)->get_hint() );
+                       INACTIVE, (it+line_pointer+3)->get_hint() );
     }
   }
 
@@ -470,23 +470,23 @@ FrameContent TextQueue::get_frame()
   {
     result.set_content(0, (it+line_pointer-1)->get_left( (it+line_pointer-1)->get_size() - 1 ),
                        (it+line_pointer-1)->get_right((it+line_pointer-1)->get_size() - 1),
-                       true, (it+line_pointer-1)->get_hint() );
+                       VISITED, (it+line_pointer-1)->get_hint() );
 
     result.set_content(1, (it+line_pointer)->get_left(chunk_pointer),
                        (it+line_pointer)->get_right(chunk_pointer),
-                       chunk_pointer >= 0 ? true : false,
+                       ACTIVE,
                        (it+line_pointer)->get_hint() );
     if(line_pointer + 1 < lines_num())
     {
       result.set_content(2, (it+line_pointer+1)->get_left(-1),
                        (it+line_pointer+1)->get_right(-1),
-                       false, (it+line_pointer+1)->get_hint() );
+                       INACTIVE, (it+line_pointer+1)->get_hint() );
     }
     if(line_pointer + 2 < lines_num())
     {
       result.set_content(3, (it+line_pointer+2)->get_left(-1),
                        (it+line_pointer+2)->get_right(-1),
-                       false, (it+line_pointer+2)->get_hint() );
+                       INACTIVE, (it+line_pointer+2)->get_hint() );
     }
   }
 
@@ -494,25 +494,25 @@ FrameContent TextQueue::get_frame()
   {
     result.set_content(2, (it+line_pointer)->get_left(chunk_pointer),
                        (it+line_pointer)->get_right(chunk_pointer),
-                       chunk_pointer >= 0 ? true : false,
+                       ACTIVE,
                        (it+line_pointer)->get_hint() );
     if(line_pointer + 1 < lines_num())
     {
     result.set_content(3, (it+line_pointer+1)->get_left(-1),
                        (it+line_pointer+1)->get_right(-1),
-                       false, (it+line_pointer+1)->get_hint() );
+                       INACTIVE, (it+line_pointer+1)->get_hint() );
     }
     if(line_pointer + 2 < lines_num())
     {
     result.set_content(0, (it+line_pointer+2)->get_left(-1),
                        (it+line_pointer+2)->get_right(-1),
-                       false, (it+line_pointer+2)->get_hint() );
+                       INACTIVE, (it+line_pointer+2)->get_hint() );
     }
     if(line_pointer + 3 < lines_num())
     {
     result.set_content(1, (it+line_pointer+3)->get_left(-1),
                        (it+line_pointer+3)->get_right(-1),
-                       false, (it+line_pointer+3)->get_hint() );
+                       INACTIVE, (it+line_pointer+3)->get_hint() );
     }
   }
 
@@ -520,23 +520,23 @@ FrameContent TextQueue::get_frame()
   {
     result.set_content(2, (it+line_pointer-1)->get_left( (it+line_pointer-1)->get_size() - 1 ),
                        (it+line_pointer-1)->get_right((it+line_pointer-1)->get_size() - 1),
-                       true, (it+line_pointer-1)->get_hint() );
+                       VISITED, (it+line_pointer-1)->get_hint() );
 
     result.set_content(3, (it+line_pointer)->get_left(chunk_pointer),
                        (it+line_pointer)->get_right(chunk_pointer),
-                       chunk_pointer >= 0 ? true : false,
+                       ACTIVE,
                        (it+line_pointer)->get_hint() );
     if(line_pointer + 1 < lines_num())
     {
       result.set_content(0, (it+line_pointer+1)->get_left(-1),
                        (it+line_pointer+1)->get_right(-1),
-                       false, (it+line_pointer+1)->get_hint() );
+                       INACTIVE, (it+line_pointer+1)->get_hint() );
     }
     if(line_pointer + 2 < lines_num())
     {
       result.set_content(1, (it+line_pointer+2)->get_left(-1),
                        (it+line_pointer+2)->get_right(-1),
-                       false, (it+line_pointer+2)->get_hint() );
+                       INACTIVE, (it+line_pointer+2)->get_hint() );
     }
   }
 

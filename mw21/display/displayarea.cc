@@ -75,19 +75,182 @@ void DisplayArea::render_frame(FrameContent &frame)
 }
 */
 
-void DisplayArea::render_string(Glib::ustring &left, Glib::ustring &right, bool background_active, bool p_is_hint)
+void DisplayArea::render_string(Glib::ustring &left, Glib::ustring &right, int p_state, bool p_is_hint)
 {
   total_width = (int)( (((float)config->getAreaHeight()) * 0.17f) );
   is_hint = p_is_hint;
   int backgroundColor;
+  int backgroundColorR, backgroundColorG, backgroundColorB;
+  int leftFontColorR, leftFontColorG, leftFontColorB;
+  int leftFontOutlineColorR, leftFontOutlineColorG, leftFontOutlineColorB;
+  int rightFontColorR, rightFontColorG, rightFontColorB;
+  int rightFontOutlineColorR, rightFontOutlineColorG, rightFontOutlineColorB;
+
 
   //std::cout << "alt_colours is: " << alt_colours << std::endl;
   if(!is_hint)
-    if (background_active) backgroundColor = get_int_color(config->getSungBackgroundColor(theme_nr));
-    else backgroundColor = get_int_color(config->getBackgroundColor(theme_nr));
+    switch(p_state)
+    {
+      case INACTIVE:
+        backgroundColor = get_int_color(config->getBackgroundColor(theme_nr));
+
+        backgroundColorR = get_red_value(config->getBackgroundColor(theme_nr));
+        backgroundColorG = get_green_value(config->getBackgroundColor(theme_nr));
+        backgroundColorB = get_blue_value(config->getBackgroundColor(theme_nr));
+
+        leftFontColorR = get_red_value(config->getInactiveLyricsColor(theme_nr));
+        leftFontColorG = get_green_value(config->getInactiveLyricsColor(theme_nr));
+        leftFontColorB = get_blue_value(config->getInactiveLyricsColor(theme_nr));
+
+        leftFontOutlineColorR = get_red_value(config->getInactiveLyricsOutlineColor(theme_nr));
+        leftFontOutlineColorG = get_green_value(config->getInactiveLyricsOutlineColor(theme_nr));
+        leftFontOutlineColorB = get_blue_value(config->getInactiveLyricsOutlineColor(theme_nr));
+
+        rightFontColorR = get_red_value(config->getInactiveLyricsColor(theme_nr));
+        rightFontColorG = get_green_value(config->getInactiveLyricsColor(theme_nr));
+        rightFontColorB = get_blue_value(config->getInactiveLyricsColor(theme_nr));
+
+        rightFontOutlineColorR = get_red_value(config->getInactiveLyricsOutlineColor(theme_nr));
+        rightFontOutlineColorG = get_green_value(config->getInactiveLyricsOutlineColor(theme_nr));
+        rightFontOutlineColorB = get_blue_value(config->getInactiveLyricsOutlineColor(theme_nr));
+
+        break;
+
+      case ACTIVE:
+        backgroundColor = get_int_color(config->getSungBackgroundColor(theme_nr));
+
+        backgroundColorR = get_red_value(config->getSungBackgroundColor(theme_nr));
+        backgroundColorG = get_green_value(config->getSungBackgroundColor(theme_nr));
+        backgroundColorB = get_blue_value(config->getSungBackgroundColor(theme_nr));
+
+        leftFontColorR = get_red_value(config->getSungLyricsColor(theme_nr));
+        leftFontColorG = get_green_value(config->getSungLyricsColor(theme_nr));
+        leftFontColorB = get_blue_value(config->getSungLyricsColor(theme_nr));
+
+        leftFontOutlineColorR = get_red_value(config->getSungLyricsOutlineColor(theme_nr));
+        leftFontOutlineColorG = get_green_value(config->getSungLyricsOutlineColor(theme_nr));
+        leftFontOutlineColorB = get_blue_value(config->getSungLyricsOutlineColor(theme_nr));
+
+        rightFontColorR = get_red_value(config->getLyricsColor(theme_nr));
+        rightFontColorG = get_green_value(config->getLyricsColor(theme_nr));
+        rightFontColorB = get_blue_value(config->getLyricsColor(theme_nr));
+
+        rightFontOutlineColorR = get_red_value(config->getLyricsOutlineColor(theme_nr));
+        rightFontOutlineColorG = get_green_value(config->getLyricsOutlineColor(theme_nr));
+        rightFontOutlineColorB = get_blue_value(config->getLyricsOutlineColor(theme_nr));
+
+        break;
+
+      case VISITED:
+        backgroundColor = get_int_color(config->getVisitedBackgroundColor(theme_nr));
+
+        backgroundColorR = get_red_value(config->getVisitedBackgroundColor(theme_nr));
+        backgroundColorG = get_green_value(config->getVisitedBackgroundColor(theme_nr));
+        backgroundColorB = get_blue_value(config->getVisitedBackgroundColor(theme_nr));
+
+        leftFontColorR = get_red_value(config->getVisitedLyricsColor(theme_nr));
+        leftFontColorG = get_green_value(config->getVisitedLyricsColor(theme_nr));
+        leftFontColorB = get_blue_value(config->getVisitedLyricsColor(theme_nr));
+
+        leftFontOutlineColorR = get_red_value(config->getVisitedLyricsOutlineColor(theme_nr));
+        leftFontOutlineColorG = get_green_value(config->getVisitedLyricsOutlineColor(theme_nr));
+        leftFontOutlineColorB = get_blue_value(config->getVisitedLyricsOutlineColor(theme_nr));
+
+        rightFontColorR = get_red_value(config->getVisitedLyricsColor(theme_nr));
+        rightFontColorG = get_green_value(config->getVisitedLyricsColor(theme_nr));
+        rightFontColorB = get_blue_value(config->getVisitedLyricsColor(theme_nr));
+
+        rightFontOutlineColorR = get_red_value(config->getVisitedLyricsOutlineColor(theme_nr));
+        rightFontOutlineColorG = get_green_value(config->getVisitedLyricsOutlineColor(theme_nr));
+        rightFontOutlineColorB = get_blue_value(config->getVisitedLyricsOutlineColor(theme_nr));
+
+        break;
+
+      default:
+        break;
+    }
   else
-    if (background_active) backgroundColor = get_int_color(config->getActiveHintsBackgroundColor(theme_nr));
-    else backgroundColor = get_int_color(config->getHintsBackgroundColor(theme_nr));
+    switch(p_state)
+    {
+      case INACTIVE:
+        backgroundColor = get_int_color(config->getHintsBackgroundColor(theme_nr));
+
+        backgroundColorR = get_red_value(config->getHintsBackgroundColor(theme_nr));
+        backgroundColorG = get_green_value(config->getHintsBackgroundColor(theme_nr));
+        backgroundColorB = get_blue_value(config->getHintsBackgroundColor(theme_nr));
+
+        leftFontColorR = get_red_value(config->getInactiveHintsColor(theme_nr));
+        leftFontColorG = get_green_value(config->getInactiveHintsColor(theme_nr));
+        leftFontColorB = get_blue_value(config->getInactiveHintsColor(theme_nr));
+
+        leftFontOutlineColorR = get_red_value(config->getInactiveHintsOutlineColor(theme_nr));
+        leftFontOutlineColorG = get_green_value(config->getInactiveHintsOutlineColor(theme_nr));
+        leftFontOutlineColorB = get_blue_value(config->getInactiveHintsOutlineColor(theme_nr));
+
+        rightFontColorR = get_red_value(config->getInactiveHintsColor(theme_nr));
+        rightFontColorG = get_green_value(config->getInactiveHintsColor(theme_nr));
+        rightFontColorB = get_blue_value(config->getInactiveHintsColor(theme_nr));
+
+        rightFontOutlineColorR = get_red_value(config->getInactiveHintsOutlineColor(theme_nr));
+        rightFontOutlineColorG = get_green_value(config->getInactiveHintsOutlineColor(theme_nr));
+        rightFontOutlineColorB = get_blue_value(config->getInactiveHintsOutlineColor(theme_nr));
+
+        break;
+
+      case ACTIVE:
+        backgroundColor = get_int_color(config->getActiveHintsBackgroundColor(theme_nr));
+
+        backgroundColorR = get_red_value(config->getActiveHintsBackgroundColor(theme_nr));
+        backgroundColorG = get_green_value(config->getActiveHintsBackgroundColor(theme_nr));
+        backgroundColorB = get_blue_value(config->getActiveHintsBackgroundColor(theme_nr));
+
+        leftFontColorR = get_red_value(config->getActiveHintsColor(theme_nr));
+        leftFontColorG = get_green_value(config->getActiveHintsColor(theme_nr));
+        leftFontColorB = get_blue_value(config->getActiveHintsColor(theme_nr));
+
+        leftFontOutlineColorR = get_red_value(config->getActiveHintsOutlineColor(theme_nr));
+        leftFontOutlineColorG = get_green_value(config->getActiveHintsOutlineColor(theme_nr));
+        leftFontOutlineColorB = get_blue_value(config->getActiveHintsOutlineColor(theme_nr));
+
+        rightFontColorR = get_red_value(config->getHintsColor(theme_nr));
+        rightFontColorG = get_green_value(config->getHintsColor(theme_nr));
+        rightFontColorB = get_blue_value(config->getHintsColor(theme_nr));
+
+        rightFontOutlineColorR = get_red_value(config->getHintsOutlineColor(theme_nr));
+        rightFontOutlineColorG = get_green_value(config->getHintsOutlineColor(theme_nr));
+        rightFontOutlineColorB = get_blue_value(config->getHintsOutlineColor(theme_nr));
+
+        break;
+
+      case VISITED:
+        backgroundColor = get_int_color(config->getVisitedHintsBackgroundColor(theme_nr));
+
+        backgroundColorR = get_red_value(config->getVisitedHintsBackgroundColor(theme_nr));
+        backgroundColorG = get_green_value(config->getVisitedHintsBackgroundColor(theme_nr));
+        backgroundColorB = get_blue_value(config->getVisitedHintsBackgroundColor(theme_nr));
+
+        leftFontColorR = get_red_value(config->getVisitedHintsColor(theme_nr));
+        leftFontColorG = get_green_value(config->getVisitedHintsColor(theme_nr));
+        leftFontColorB = get_blue_value(config->getVisitedHintsColor(theme_nr));
+
+        leftFontOutlineColorR = get_red_value(config->getVisitedHintsOutlineColor(theme_nr));
+        leftFontOutlineColorG = get_green_value(config->getVisitedHintsOutlineColor(theme_nr));
+        leftFontOutlineColorB = get_blue_value(config->getVisitedHintsOutlineColor(theme_nr));
+
+        rightFontColorR = get_red_value(config->getVisitedHintsColor(theme_nr));
+        rightFontColorG = get_green_value(config->getVisitedHintsColor(theme_nr));
+        rightFontColorB = get_blue_value(config->getVisitedHintsColor(theme_nr));
+
+        rightFontOutlineColorR = get_red_value(config->getVisitedHintsOutlineColor(theme_nr));
+        rightFontOutlineColorG = get_green_value(config->getVisitedHintsOutlineColor(theme_nr));
+        rightFontOutlineColorB = get_blue_value(config->getVisitedHintsOutlineColor(theme_nr));
+
+        break;
+
+      default:
+
+        break;
+    }
 
   try
   {
@@ -110,11 +273,11 @@ void DisplayArea::render_string(Glib::ustring &left, Glib::ustring &right, bool 
     //Print(4 * config->getAreaWidth() * config->getAreaHeight() );
 	  for ( unsigned int i = 0; i < left.length(); i++ )
 	  {
-      render_glyph(left.at(i), true, background_active);
+      render_glyph(left.at(i), leftFontColorR, leftFontColorG, leftFontColorB, leftFontOutlineColorR, leftFontOutlineColorG, leftFontOutlineColorB);
   	}
   	for ( unsigned int i = 0; i < right.length(); i++ )
   	{
-      render_glyph(right.at(i), false, background_active);
+      render_glyph(right.at(i), rightFontColorR, rightFontColorG, rightFontColorB, rightFontOutlineColorR, rightFontOutlineColorG, rightFontOutlineColorB);
 	  }
     origin_x += space_width;
     m_clip = Gdk::Pixbuf::create (Gdk::COLORSPACE_RGB, true, 8, std::min(origin_x, (int)(config->getAreaWidth() * 3))  , config->getAreaHeight());
@@ -307,7 +470,7 @@ void DisplayArea::Print(int bytesize)
   }
 }
 
-void DisplayArea::render_glyph(gunichar ch, bool is_active, bool on_active_background)
+void DisplayArea::render_glyph(gunichar ch, int p_font_R, int p_font_G, int p_font_B, int p_outline_R, int p_outline_G, int p_outline_B)
 {
 
   FT_Face face = *facep;
@@ -400,71 +563,13 @@ void DisplayArea::render_glyph(gunichar ch, bool is_active, bool on_active_backg
             uint8 text_r, text_g, text_b;
             uint8 out_r, out_g, out_b;
 
-            if(!is_hint)
-              if(is_active)
-              {
-                text_r = get_red_value(config->getSungLyricsColor(theme_nr));
-                text_g = get_green_value(config->getSungLyricsColor(theme_nr));
-                text_b = get_blue_value(config->getSungLyricsColor(theme_nr));
+            text_r = p_font_R;
+            text_g = p_font_G;
+            text_b = p_font_B;
 
-                out_r = get_red_value(config->getSungLyricsOutlineColor(theme_nr));
-                out_g = get_green_value(config->getSungLyricsOutlineColor(theme_nr));
-                out_b = get_blue_value(config->getSungLyricsOutlineColor(theme_nr));
-              }
-              else
-                if(on_active_background)
-                {
-                  text_r = get_red_value(config->getLyricsColor(theme_nr));
-                  text_g = get_green_value(config->getLyricsColor(theme_nr));
-                  text_b = get_blue_value(config->getLyricsColor(theme_nr));
-
-                  out_r = get_red_value(config->getLyricsOutlineColor(theme_nr));
-                  out_g = get_green_value(config->getLyricsOutlineColor(theme_nr));
-                  out_b = get_blue_value(config->getLyricsOutlineColor(theme_nr));
-                }
-                else
-                {
-                  text_r = get_red_value(config->getInactiveLyricsColor(theme_nr));
-                  text_g = get_green_value(config->getInactiveLyricsColor(theme_nr));
-                  text_b = get_blue_value(config->getInactiveLyricsColor(theme_nr));
-
-                  out_r = get_red_value(config->getInactiveLyricsOutlineColor(theme_nr));
-                  out_g = get_green_value(config->getInactiveLyricsOutlineColor(theme_nr));
-                  out_b = get_blue_value(config->getInactiveLyricsOutlineColor(theme_nr));
-                }
-            else
-              if(is_active)
-              {
-                text_r = get_red_value(config->getActiveHintsColor(theme_nr));
-                text_g = get_green_value(config->getActiveHintsColor(theme_nr));
-                text_b = get_blue_value(config->getActiveHintsColor(theme_nr));
-
-                out_r = get_red_value(config->getActiveHintsOutlineColor(theme_nr));
-                out_g = get_green_value(config->getActiveHintsOutlineColor(theme_nr));
-                out_b = get_blue_value(config->getActiveHintsOutlineColor(theme_nr));
-              }
-              else
-                if(on_active_background)
-                {
-                  text_r = get_red_value(config->getHintsColor(theme_nr));
-                  text_g = get_green_value(config->getHintsColor(theme_nr));
-                  text_b = get_blue_value(config->getHintsColor(theme_nr));
-
-                  out_r = get_red_value(config->getHintsOutlineColor(theme_nr));
-                  out_g = get_green_value(config->getHintsOutlineColor(theme_nr));
-                  out_b = get_blue_value(config->getHintsOutlineColor(theme_nr));
-                }
-                else
-                {
-                  text_r = get_red_value(config->getInactiveHintsColor(theme_nr));
-                  text_g = get_green_value(config->getInactiveHintsColor(theme_nr));
-                  text_b = get_blue_value(config->getInactiveHintsColor(theme_nr));
-
-                  out_r = get_red_value(config->getInactiveHintsOutlineColor(theme_nr));
-                  out_g = get_green_value(config->getInactiveHintsOutlineColor(theme_nr));
-                  out_b = get_blue_value(config->getInactiveHintsOutlineColor(theme_nr));
-                }
-
+            out_r = p_outline_R;
+            out_g = p_outline_G;
+            out_b = p_outline_B;
 
             // Loop over the outline spans and just draw them into the
             // image.

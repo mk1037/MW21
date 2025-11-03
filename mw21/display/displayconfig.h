@@ -50,6 +50,13 @@ private:
   Glib::ustring inactiveHintsColor[THEMES_NUM];
   Glib::ustring inactiveHintsOutlineColor[THEMES_NUM];
 
+  Glib::ustring visitedBackgroundColor[THEMES_NUM];
+  Glib::ustring visitedHintsBackgroundColor[THEMES_NUM];
+  Glib::ustring visitedLyricsColor[THEMES_NUM];
+  Glib::ustring visitedLyricsOutlineColor[THEMES_NUM];
+  Glib::ustring visitedHintsColor[THEMES_NUM];
+  Glib::ustring visitedHintsOutlineColor[THEMES_NUM];
+
   double outlineWidth;
 
   Glib::ustring fontDirPrefix;
@@ -114,6 +121,13 @@ public:
   Glib::ustring getInactiveLyricsOutlineColor(unsigned int p_th_idx);
   Glib::ustring getInactiveHintsColor(unsigned int p_th_idx);
   Glib::ustring getInactiveHintsOutlineColor(unsigned int p_th_idx);
+
+  Glib::ustring getVisitedBackgroundColor(unsigned int p_th_idx);
+  Glib::ustring getVisitedHintsBackgroundColor(unsigned int p_th_idx);
+  Glib::ustring getVisitedLyricsColor(unsigned int p_th_idx);
+  Glib::ustring getVisitedLyricsOutlineColor(unsigned int p_th_idx);
+  Glib::ustring getVisitedHintsColor(unsigned int p_th_idx);
+  Glib::ustring getVisitedHintsOutlineColor(unsigned int p_th_idx);
 
   double getOutlineWidth();
 
