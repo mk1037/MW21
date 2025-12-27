@@ -36,30 +36,36 @@ message()
 
 createActivator()
 {
+  activatorName="$1"
+  workingDir="$2"
+  command="$3"
+  iconPath="$4"
+  withTerminal="$5"
+
   MW21_ACTIVATOR_FILE=$MW21_DESKTOP_DIR/$1.desktop
   [ -f $MW21_ACTIVATOR_FILE ] && rm $MW21_ACTIVATOR_FILE
 
   if [ $MW21_DESKTOP_ENVIRONMENT == "xfce" ]; then
-    if [ $5 == "true" ]; then
-      printf "[Desktop Entry]\nVersion=1.0\nType=Application\nName=%s\nComment=\nExec=$MW21_TERMINAL_BIN --working-directory=%s -x ./%s\nIcon=%s\nPath=\nTerminal=false\nStartupNotify=false\n" $1 $2 $3 $4 > $MW21_ACTIVATOR_FILE
+    if [ "$withTerminal" == "true" ]; then
+      printf "[Desktop Entry]\nVersion=1.0\nType=Application\nName=%s\nComment=\nExec=$MW21_TERMINAL_BIN --working-directory=%s -x ./%s\nIcon=%s\nPath=\nTerminal=false\nStartupNotify=false\n" "$activatorName" "$workingDir" "$command" "$iconPath" > $MW21_ACTIVATOR_FILE
     else
-      printf "[Desktop Entry]\nVersion=1.0\nType=Application\nName=%s\nComment=\nExec=%s\nIcon=%s\nPath=%s\nTerminal=false\nStartupNotify=false\n" $1 $3 $4 $2 > $MW21_ACTIVATOR_FILE
+      printf "[Desktop Entry]\nVersion=1.0\nType=Application\nName=%s\nComment=\nExec=%s\nIcon=%s\nPath=%s\nTerminal=false\nStartupNotify=false\n" "$activatorName" "$command" "$iconPath" "$workingDir" > $MW21_ACTIVATOR_FILE
     fi
   fi
 
   if [ $MW21_DESKTOP_ENVIRONMENT == "cinnamon" ]; then
-    if [ $5 == "true" ]; then
-      printf "#!/usr/bin/env xdg-open\n[Desktop Entry]\nVersion=1.0\nType=Application\nTerminal=false\nExec=$MW21_TERMINAL_BIN --window --working-directory=%s -x ./%s\nName=%s\nIcon=%s\n" $2 $3 $1 $4 > $MW21_ACTIVATOR_FILE
+    if [ "$withTerminal" == "true" ]; then
+      printf "#!/usr/bin/env xdg-open\n[Desktop Entry]\nVersion=1.0\nType=Application\nTerminal=false\nExec=$MW21_TERMINAL_BIN --window --working-directory=%s -x ./%s\nName=%s\nIcon=%s\n" "$workingDir" "$command" "$activatorName" "$iconPath" > $MW21_ACTIVATOR_FILE
     else
-      printf "#!/usr/bin/env xdg-open\n[Desktop Entry]\nVersion=1.0\nType=Application\nTerminal=false\nExec=%s\nPath=%s\nName=%s\nIcon=%s\n" $3 $2 $1 $4 > $MW21_ACTIVATOR_FILE
+      printf "#!/usr/bin/env xdg-open\n[Desktop Entry]\nVersion=1.0\nType=Application\nTerminal=false\nExec=%s\nPath=%s\nName=%s\nIcon=%s\n" "$command" "$workingDir" "$activatorName" "$iconPath" > $MW21_ACTIVATOR_FILE
     fi
   fi
 
   if [ $MW21_DESKTOP_ENVIRONMENT == "mate" ]; then
-    if [ $5 == "true" ]; then
-      printf "#!/usr/bin/env xdg-open\n[Desktop Entry]\nVersion=1.0\nType=Application\nTerminal=false\nExec=$MW21_TERMINAL_BIN --working-directory=%s -x ./%s\nName=%s\nIcon=%s\n" $2 $3 $1 $4 > $MW21_ACTIVATOR_FILE
+    if [ "$withTerminal" == "true" ]; then
+      printf "#!/usr/bin/env xdg-open\n[Desktop Entry]\nVersion=1.0\nType=Application\nTerminal=false\nExec=$MW21_TERMINAL_BIN --working-directory=%s -x ./%s\nName=%s\nIcon=%s\n" "$workingDir" "$command" "$activatorName" "$iconPath" > $MW21_ACTIVATOR_FILE
     else
-      printf "#!/usr/bin/env xdg-open\n[Desktop Entry]\nVersion=1.0\nType=Application\nTerminal=false\nExec=%s\nPath=%s\nName=%s\nIcon=%s\n" $3 $2 $1 $4 > $MW21_ACTIVATOR_FILE
+      printf "#!/usr/bin/env xdg-open\n[Desktop Entry]\nVersion=1.0\nType=Application\nTerminal=false\nExec=%s\nPath=%s\nName=%s\nIcon=%s\n" "$command" "$workingDir" "$activatorName" "$iconPath" > $MW21_ACTIVATOR_FILE
     fi
   fi
 
@@ -86,6 +92,7 @@ sudo apt-get install -y build-essential \
   mc \
   vkeybd \
   wget \
+  python3-tk \
   meld
 
 message "Compiling MW21"
@@ -148,3 +155,4 @@ createActivator "keyboardMW21" $MW2_DIR/mw21/web $MW2_DIR/mw21/web/vk.sh $MW2_DI
 createActivator "placeMW21" $MW2_DIR/mw21/web place_windows.sh $MW2_DIR/mw21/icons/placeMW21.png true
 createActivator "displayMW21" $MW2_DIR/mw21/web $MW2_DIR/mw21/web/display.sh $MW2_DIR/mw21/icons/displayMW21.png false
 createActivator "collectionMW21" $MW2_DIR collection.sh $MW2_DIR/mw21/icons/collectionMW21.png true
+createActivator "editorMW21" "$MW2_DIR/mw21/editor" "python3 $MW2_DIR/mw21/editor/editor.py" "$MW2_DIR/mw21/icons/editorMW21.png" false
