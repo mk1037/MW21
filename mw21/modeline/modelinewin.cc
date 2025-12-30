@@ -698,6 +698,36 @@ void ModelineWin::update_widgets2()
     }
   }
   
+  //it means modeline has to re-scan collection
+  if(t_title == "SCAN")
+  {
+    if (m_state == STATE_PLAYING) return;
+
+    if (timeout_client_thread)
+    {
+      std::cout << "Can't start a timeout thread while another one is running." << std::endl;
+    }
+    else
+    {
+      // Start a new timeout thread.
+      timeout_client_thread = Glib::Threads::Thread::create(
+        sigc::bind(sigc::mem_fun(timeoutClient, &TimeoutClient::countdown), this));
+
+      m_prompt_1->initialize(THEME_OK);
+      m_prompt_2->initialize(THEME_OK);
+
+      client->readBanks(modelineConfig->getDataDir());
+
+      m_curr->initialize(THEME_BANK_3);
+      m_curr2->initialize(THEME_BANK_3);
+
+      m_space1->render_string(t_emptyString, false);
+      Glib::ustring to_display = "Rescanned";
+      m_curr->render_string(to_display, false);
+      m_space2->render_string(t_emptyString, false);
+    }
+  }
+
   //it means that signal came after loading >
   if(t_title == "K1E" || t_title == "K3Y" || t_title == "WRX")
   {

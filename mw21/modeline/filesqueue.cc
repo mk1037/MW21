@@ -39,6 +39,7 @@ int FilesQueue::readDir(Glib::ustring p_absDir)
     return 1;
   }
 
+  items.clear();
   Glib::ustring t_name;
   while ((dirp = readdir(dp)) != NULL)
   {
@@ -55,6 +56,7 @@ int FilesQueue::readDir(Glib::ustring p_absDir)
   closedir(dp);
   
   std::sort(items.begin(), items.end());
+  pointer = 0;
   
   return 0;
 }

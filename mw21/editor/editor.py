@@ -194,6 +194,10 @@ def deleteSelected(*args):
   managerObj.printSongs()
   redrawCollection(managerObj)
 
+def rescan(*args):
+  os.chdir(homeDir + "/MW21/mw21/web")
+  os.system(homeDir + "/MW21/mw21/web/rescan_mw2.sh")
+
 
 def importTape(*args):
   if collectionVar.get() == "":
@@ -255,9 +259,12 @@ separatorFrame.grid(column = 1, row = 0, padx = 100, pady = 5, sticky=(N, W, E))
 tapeButton = ttk.Button(topFrame, text='tar', command=importTape)
 tapeButton.grid(column = 2, row = 0, padx = 5, pady = 5, sticky=(N, E))
 
+rescanButton = ttk.Button(topFrame, text='Rescan', command=rescan)
+rescanButton.grid(column = 3, row = 0, padx = 15, pady = 5, sticky=(N, E))
+
 
 deleteButton = ttk.Button(bottomFrame, text='Delete selected', command=deleteSelected)
-deleteButton.grid(column = 0, row = 0, sticky=(S, E))
+deleteButton.grid(column = 1, row = 0, sticky=(S, E))
 
 root.mainloop()
 
