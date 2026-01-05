@@ -5,7 +5,7 @@
 #    2. log file
 #    3. K3Y vs break
 
-# Copyright (C) 2017-2025 Marek Momot
+# Copyright (C) 2017-2026 Marek Momot
 #
 # This file is part of MW21.
 #
@@ -89,16 +89,17 @@ function create_vlc_config { # source_config print_gain eq_bands
   fi
 }
 
-function play_vpl { # dir item
+function play_vpl { # dir item K3Y_vs_BREAK
+  WAVES_DIR=$1
+  ITEM_LABEL=$2
+  TYPE_INDICATOR=$3
+
+  ITEM_FILENAME=$(ls $WAVES_DIR | grep $ITEM_LABEL | sort | head -1)
+
   TYPE="video"
-  echo $2 | grep -i -e "mp3\$"
+  echo $ITEM_FILENAME | grep -qi '\.mp3\b\|\.flac\b\|\.wav\b\|\.ogg\b'
   if [ $? == 0 ]; then TYPE="music"; fi
-
-  echo $2 | grep -i -e "wav\$"
-  if [ $? == 0 ]; then TYPE="music"; fi
-
-  echo $2 | grep -i -e "flac\$"
-  if [ $? == 0 ]; then TYPE="music"; fi
+  echo "FILE name is $ITEM_FILENAME"
 
   $PLACEV2_PATH $TYPE &
 
@@ -106,7 +107,7 @@ function play_vpl { # dir item
   C_TIMESTAMP=$(date +%Y_%m_%d__%H:%M:%S)
 
   if [ "music" == $TYPE ]; then
-    if [ $3 != "K3Y" ]; then
+    if [ $TYPE_INDICATOR != "K3Y" ]; then
       # filter gain
       TMP_VOLUME=$(head -1 $DEFAULT_VOLUME_PATH)
       TMP_GAIN=$(percent_to_gain $TMP_VOLUME)
@@ -117,13 +118,13 @@ function play_vpl { # dir item
     else
       create_vlc_config ./templates/alsa_music_template "1.000000" "$TMP_EQ_FLAG"
     fi
-    echo "$C_TIMESTAMP AUDIO $K3Y_VS_BREAK $2" >> $PLAYVPL2_LOGS_PATH
-    cvlc --extraintf http --http-host 127.0.0.1 --http-port $VLC_PORT --http-password $VLC_PASSWORD --no-volume-save $1/$2 2>>$PLAY2_LOG
+    echo "$C_TIMESTAMP AUDIO $K3Y_VS_BREAK $ITEM_FILENAME" >> $PLAYVPL2_LOGS_PATH
+    cvlc --extraintf http --http-host 127.0.0.1 --http-port $VLC_PORT --http-password $VLC_PASSWORD --no-volume-save $WAVES_DIR/$ITEM_FILENAME 2>>$PLAY2_LOG
   else
     # create tmp movie template
     create_vlc_config ./templates/alsa_movie_template "1.000000" "$TMP_EQ_FLAG"
-    echo "$C_TIMESTAMP VIDEO $K3Y_VS_BREAK $2" >> $PLAYVPL2_LOGS_PATH
-    vlc --extraintf http --http-host 127.0.0.1 --http-port $VLC_PORT --http-password $VLC_PASSWORD --no-volume-save $1/$2 2>>$PLAY2_LOG
+    echo "$C_TIMESTAMP VIDEO $K3Y_VS_BREAK $ITEM_FILENAME" >> $PLAYVPL2_LOGS_PATH
+    vlc --extraintf http --http-host 127.0.0.1 --http-port $VLC_PORT --http-password $VLC_PASSWORD --no-volume-save $WAVES_DIR/$ITEM_FILENAME 2>>$PLAY2_LOG
   fi
 }
 
@@ -136,6 +137,7 @@ else
 fi
 
 while [ $LINES_NUM -gt 0 ] ; do
+   WAVESDIR=$1
    nextitem=$( head -1 $PLAYVPL2_PLAYLIST )
    cat $PLAYVPL2_PLAYLIST | awk 'NR == 1 { next } { print }' > $PLAYVPL2_PLAYLIST_TMP
    cp $PLAYVPL2_PLAYLIST_TMP $PLAYVPL2_PLAYLIST
@@ -152,7 +154,7 @@ while [ $LINES_NUM -gt 0 ] ; do
      echo "Not sleeping $TOTAL_TIME_OFFSET"
    fi
 
-   play_vpl $1 $nextitem $K3Y_VS_BREAK
+   play_vpl $WAVESDIR $nextitem $K3Y_VS_BREAK
    LINES_NUM=$(cat $PLAYVPL2_PLAYLIST | wc -l)
    cp $PLAYVPL2_PLAYLIST $PLAYVPL2_PLAYLIST_TO_DISPLAY
 done

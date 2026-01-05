@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Copyright (C) 2017-2025 Marek Momot
+# Copyright (C) 2017-2026 Marek Momot
 #
 # This file is part of MW21.
 #
@@ -46,7 +46,7 @@ if [ ! -z $player3000_match_code ] ; then
 #  EXEC_DELAY_VALUE=`expr $DELAY_VALUE + 0.2`
 #  $STOPVPL2_PATH
 # compute playlist and args for playvpl2 and execute "signal_playvpl2.sh" script (it is extra script which is ready already)
-  echo $TITLE_TO_PLAY.mp3 > $PLAYVPL2_PLAYLIST
+  echo $TITLE_TO_PLAY > $PLAYVPL2_PLAYLIST
   echo "$DATA_DIRECTORY/bank_3/waves/ $MW2_WEB_DIR/mw2_web_log2 K3Y $EXEC_DELAY_VALUE" > $PLAYVPL2_ARGS_PATH
   $SIGNAL_PLAYVPL2_PATH
   pmidi -d 0 -p "14:0" "$DATA_DIRECTORY/bank_3/midi/$TITLE_TO_PLAY.mid"
