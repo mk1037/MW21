@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Copyright (C) 2017-2025 Marek Momot
+# Copyright (C) 2017-2026 Marek Momot
 #
 # This file is part of MW21.
 #
@@ -21,7 +21,7 @@ printf "###################### MW21 ######################
 
 Welcome to MW21 - Music Workstation!
 
-Copyright (C) 2017-2025 Marek Momot
+Copyright (C) 2017-2026 Marek Momot
 
 MW21 is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
