@@ -1,4 +1,4 @@
-# Copyright (C) 2017-2025 Marek Momot
+# Copyright (C) 2017-2026 Marek Momot
 #
 # This file is part of MW21.
 #

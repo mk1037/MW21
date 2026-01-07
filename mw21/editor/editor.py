@@ -1,4 +1,4 @@
-# Copyright (C) 2017-2025 Marek Momot
+# Copyright (C) 2017-2026 Marek Momot
 #
 # This file is part of MW21.
 #
@@ -122,13 +122,14 @@ def redrawCollection(p_manager):
 
 
     background = "white"
-    color = "green"
-    text = "audio OK"
     if len(collection.getSongs()[item]["audio"]) != 1:
       color = "red"
       text = "NO audio"
+    else:
+      color = "green"
+      text = " ." + collection.getSongs()[item]["audio"][0].split('.')[-1] + " OK"
 
-    caudio = ttk.Label(labelsFrame, text=text, width = 8, borderwidth=1, relief="solid")
+    caudio = ttk.Label(labelsFrame, text=text, width = 10, borderwidth=1, relief="solid")
     caudio['background'] = background
     caudio['foreground'] = color
     caudio.grid(column = 2, row = rowindex, padx = 1, sticky=(N, W, E))
@@ -138,12 +139,12 @@ def redrawCollection(p_manager):
 
     background = "white"
     color = "green"
-    text = "delay OK"
+    text = " .delay OK"
     if len(collection.getSongs()[item]["delay"]) != 1:
       color = "red"
       text = "NO delay"
 
-    cdelay = ttk.Label(labelsFrame, text=text, width = 8, borderwidth=1, relief="solid")
+    cdelay = ttk.Label(labelsFrame, text=text, width = 10, borderwidth=1, relief="solid")
     cdelay['background'] = background
     cdelay['foreground'] = color
     cdelay.grid(column = 3, row = rowindex, padx = 1, sticky=(N, W, E))
@@ -152,12 +153,12 @@ def redrawCollection(p_manager):
 
     background = "white"
     color = "green"
-    text = "midi OK"
+    text = " .mid OK"
     if len(collection.getSongs()[item]["midi"]) != 1:
       color = "red"
       text = "NO midi"
 
-    cmidi = ttk.Label(labelsFrame, text=text, width = 8, borderwidth=1, relief="solid")
+    cmidi = ttk.Label(labelsFrame, text=text, width = 10, borderwidth=1, relief="solid")
     cmidi['background'] = background
     cmidi['foreground'] = color
     cmidi.grid(column = 4, row = rowindex, padx = 1, sticky=(N, W, E))
@@ -168,12 +169,12 @@ def redrawCollection(p_manager):
 
     background = "white"
     color = "green"
-    text = "text OK"
+    text = " .txt OK"
     if len(collection.getSongs()[item]["midi"]) != 1:
       color = "red"
       text = "NO text"
 
-    ctext = ttk.Label(labelsFrame, text=text, width = 8, borderwidth=1, relief="solid")
+    ctext = ttk.Label(labelsFrame, text=text, width = 10, borderwidth=1, relief="solid")
     ctext['background'] = background
     ctext['foreground'] = color
     ctext.grid(column = 5, row = rowindex, padx = 1, sticky=(N, W, E))
@@ -209,7 +210,7 @@ def importTape(*args):
   print("Will import to {}".format(tapesObj.collectionPath))
   lastPath = None
   for apath in files:
-    lastPath = tapesObj.importTape(apath)
+    lastPath = tapesObj.importTape(apath, managerObj.getFormatPrio())
 
   if lastPath is not None:
     managerObj.setTapesRecentDir(lastPath)
@@ -268,5 +269,4 @@ deleteButton.grid(column = 1, row = 0, sticky=(S, E))
 
 root.mainloop()
 
-
-
+managerObj.saveConfig()

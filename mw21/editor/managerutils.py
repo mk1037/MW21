@@ -1,4 +1,4 @@
-# Copyright (C) 2017-2025 Marek Momot
+# Copyright (C) 2017-2026 Marek Momot
 #
 # This file is part of MW21.
 #
@@ -17,7 +17,7 @@
 
 import re
 
-g_patternFilename = r"^[a-zA-Z0-9]+_K3[yY][0-9]{2,3}\.(txt|mid|mp3|delay)$"
+g_patternFilename = r"^[a-zA-Z0-9]+_K3[yY][0-9]{2,3}\.(txt|mid|flac|mp3|ogg|wav|delay)$"
 
 def validFilename(p_filename):
   if re.search(g_patternFilename, p_filename) is not None:

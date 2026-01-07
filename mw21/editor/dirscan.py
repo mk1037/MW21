@@ -1,4 +1,4 @@
-# Copyright (C) 2017-2025 Marek Momot
+# Copyright (C) 2017-2026 Marek Momot
 #
 # This file is part of MW21.
 #
@@ -28,13 +28,19 @@ class DirScan:
 
   def scanDirPaths(self):
     allpaths = []
-    for apath in glob.iglob(self.rootDir + "/*K3Y*.txt", recursive=True):
+    for apath in glob.iglob(self.rootDir + "/*K3Y*.flac", recursive=True):
       allpaths.append(apath)
     for apath in glob.iglob(self.rootDir + "/*K3Y*.mp3", recursive=True):
+      allpaths.append(apath)
+    for apath in glob.iglob(self.rootDir + "/*K3Y*.ogg", recursive=True):
+      allpaths.append(apath)
+    for apath in glob.iglob(self.rootDir + "/*K3Y*.wav", recursive=True):
       allpaths.append(apath)
     for apath in glob.iglob(self.rootDir + "/*K3Y*.delay", recursive=True):
       allpaths.append(apath)
     for apath in glob.iglob(self.rootDir + "/*K3Y*.mid", recursive=True):
+      allpaths.append(apath)
+    for apath in glob.iglob(self.rootDir + "/*K3Y*.txt", recursive=True):
       allpaths.append(apath)
     return allpaths
 
@@ -68,7 +74,16 @@ class DirScan:
               }
 
     audio = []
+    for apath in glob.iglob(self.rootDir + "/" + p_label + ".flac", recursive=True):
+      result["audio"].append(apath)
+
     for apath in glob.iglob(self.rootDir + "/" + p_label + ".mp3", recursive=True):
+      result["audio"].append(apath)
+
+    for apath in glob.iglob(self.rootDir + "/" + p_label + ".ogg", recursive=True):
+      result["audio"].append(apath)
+
+    for apath in glob.iglob(self.rootDir + "/" + p_label + ".wav", recursive=True):
       result["audio"].append(apath)
 
     delay = []

@@ -1,4 +1,4 @@
-# Copyright (C) 2017-2025 Marek Momot
+# Copyright (C) 2017-2026 Marek Momot
 #
 # This file is part of MW21.
 #
@@ -33,7 +33,7 @@ class Tapes:
 
 
 
-  def importTape(self, p_tapePath):
+  def importTape(self, p_tapePath, p_formatPrio):
     chunks = p_tapePath.split("/")
     tapeFilename = chunks[-1]
     chunks.pop()
@@ -45,7 +45,8 @@ class Tapes:
     tarObj = tarfile.open(name = p_tapePath)
     members = tarObj.getnames()
 
-    audiofiles = []
+    audiofiles = { "flac" : [], "mp3" : [], "ogg" : [], "wav" : [] }
+
     delayfiles = []
     midifiles = []
     textfiles = []
@@ -53,8 +54,15 @@ class Tapes:
     chunks2 = tapeFilename.split(".")
     tapeLabel = chunks2[0]
     for path in members:
+      if re.search(tapeLabel + ".flac$", path):
+        audiofiles["flac"].append(path)
       if re.search(tapeLabel + ".mp3$", path):
-        audiofiles.append(path)
+        audiofiles["mp3"].append(path)
+      if re.search(tapeLabel + ".ogg", path):
+        audiofiles["ogg"].append(path)
+      if re.search(tapeLabel + ".wav$", path):
+        audiofiles["wav"].append(path)
+
       if re.search(tapeLabel + ".delay$", path):
         delayfiles.append(path)
       if re.search(tapeLabel + ".mid$", path):
@@ -63,17 +71,27 @@ class Tapes:
         textfiles.append(path)
         
     pprint.pprint(audiofiles)
+
     pprint.pprint(delayfiles)
     pprint.pprint(midifiles)
     pprint.pprint(textfiles)
     
-    if len(audiofiles) != 1 or len(delayfiles) != 1 or len(midifiles) != 1 or len(textfiles) != 1:
+    audiofilesNumber = len(audiofiles["flac"]) + len(audiofiles["mp3"]) + len(audiofiles["ogg"]) + len(audiofiles["wav"])
+
+    if audiofilesNumber < 1 or len(delayfiles) != 1 or len(midifiles) != 1 or len(textfiles) != 1:
       print("Wrong tape archive '{}'".format(p_tapePath))
       return
 
-    audiofile = tarObj.extractfile(tarObj.getmember(audiofiles[0]))
-    with open(self.collectionPath + "/bank_3/waves/" + tapeLabel + ".mp3", 'wb') as a_writer:
-      a_writer.write(audiofile.read())
+    if len(audiofiles["flac"]) > 1 or len(audiofiles["mp3"]) > 1 or len(audiofiles["ogg"]) > 1 or len(audiofiles["wav"]) > 1:
+      print("Wrong tape archive '{}' ambiguous audio files".format(p_tapePath))
+      return
+
+    for tformat in p_formatPrio:
+      if len(audiofiles[tformat]) > 0:
+        audiofile = tarObj.extractfile(tarObj.getmember(audiofiles[tformat][0]))
+        with open(self.collectionPath + "/bank_3/waves/" + tapeLabel + "." + tformat, 'wb') as a_writer:
+          a_writer.write(audiofile.read())
+        break
 
     delayfile = tarObj.extractfile(tarObj.getmember(delayfiles[0]))
     with open(self.collectionPath + "/bank_3/delay/" + tapeLabel + ".delay", 'wb') as a_writer:

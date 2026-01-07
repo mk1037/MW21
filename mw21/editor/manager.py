@@ -1,4 +1,4 @@
-# Copyright (C) 2017-2025 Marek Momot
+# Copyright (C) 2017-2026 Marek Momot
 #
 # This file is part of MW21.
 #
@@ -29,6 +29,20 @@ class Manager:
     self.collectionsDir = p_collectionsDir
     if "tapesRecentDir" not in self.config.keys():
       self.config["tapesRecentDir"] = p_homeDir
+    if "formatPrio" not in self.config.keys():
+      self.config["formatPrio"] = ['flac', 'wav', 'ogg', 'mp3']
+
+    goodFormats = []
+    for tformat in self.config["formatPrio"]:
+      if tformat in ['flac', 'wav', 'ogg', 'mp3']:
+        if tformat not in goodFormats:
+          goodFormats.append(tformat)
+
+    for tformat in ['flac', 'wav', 'ogg', 'mp3']:
+      if tformat not in goodFormats:
+        goodFormats.append(tformat)
+
+    self.config["formatPrio"] = goodFormats
 
   def setCollectionName(self, p_collectionName):
     self.collectionName = p_collectionName
@@ -46,15 +60,27 @@ class Manager:
   def getCollection(self):
     return self.collection
 
+  def getFormatPrio(self):
+    return self.config["formatPrio"]
+
   def removeSong(self, p_label):
     print("Removing song '{}'".format(p_label))
-    audiofile = self.collectionsDir + "/" + self.collectionName + "/bank_3/waves/" + p_label + ".mp3"
+    flacfile = self.collectionsDir + "/" + self.collectionName + "/bank_3/waves/" + p_label + ".flac"
+    mp3file = self.collectionsDir + "/" + self.collectionName + "/bank_3/waves/" + p_label + ".mp3"
+    oggfile = self.collectionsDir + "/" + self.collectionName + "/bank_3/waves/" + p_label + ".ogg"
+    wavfile = self.collectionsDir + "/" + self.collectionName + "/bank_3/waves/" + p_label + ".wav"
     delayfile = self.collectionsDir + "/" + self.collectionName + "/bank_3/delay/" + p_label + ".delay"
     midifile = self.collectionsDir + "/" + self.collectionName + "/bank_3/midi/" + p_label + ".mid"
     textfile = self.collectionsDir + "/" + self.collectionName + "/bank_3/text/" + p_label + ".txt"
 
-    if os.path.exists(audiofile):
-      os.remove(audiofile)
+    if os.path.exists(flacfile):
+      os.remove(flacfile)
+    if os.path.exists(mp3file):
+      os.remove(mp3file)
+    if os.path.exists(oggfile):
+      os.remove(oggfile)
+    if os.path.exists(wavfile):
+      os.remove(wavfile)
     if os.path.exists(delayfile):
       os.remove(delayfile)
     if os.path.exists(midifile):
