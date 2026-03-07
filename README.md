@@ -17,7 +17,7 @@ It is controlled via any physical MIDI device (keyboard, pad, launcher, whatever
 It also integrates through `php`/`shell` scripts with `apache2` server. It offers simple web-based playlist for playback music through e.g. breaks during your performance. It's convenient for controlling music player with your mobile phone staying connected in LAN.
 
 ## Concept
-The basic idea behind is simultaneous playback of an audio file (wav or mp3) and a midi file (with adjustable `delay` of audio __following__ midi). Midi events emitted from the midi player are forwarded to the `display` program which advances pointer of the highlighted text. It works quite well :-)
+The basic idea behind is simultaneous playback of an audio file (`.flac`, `.ogg`, `.wav` or `.mp3`) and a midi file (with adjustable `delay` of audio __following__ midi). Midi events emitted from the midi player are forwarded to the `display` program which advances pointer of the highlighted text. It works quite well :-)
 
 ## Implementation
 Window library is `gtkmm-3.0`
