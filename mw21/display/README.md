@@ -1,9 +1,12 @@
 # Display
 
 ## General concept
-The `display` is a program for displaying song lyrics with auto scrolling in sync to the music. It is primarily controlled by MIDI events, but controlling by PC keyboard is also possible.
+The `Display` is a program for displaying song lyrics with auto scrolling in sync to the music. It is primarily controlled by MIDI events, but controlling by PC keyboard is also possible.
 
 Originally it is a part of [MW21](https://github.com/mk1037/MW21) karaoke, stage prompter, but it can run standalone and be used together with any midi sequencer/DAW.
+
+![MW21 Display running together with MusE](../pictures/MW21_Display_with_MusE.png)
+MW21 Display running together with MusE
 
 Text input is a plain-text file. Tokens separated by newline or `|`.
 

@@ -4,10 +4,15 @@
 MW21 is a simple karaoke / stage-prompter application for singers and amateur music bands. It's able to playback music and display lyrics in four rows highlighting it in-sync to the music.
 
 ![MW21 playing](mw21/pictures/MW21_playing.png)
+MW21 playing
 
 Video tutorials: [https://www.youtube.com/@mk-1037](https://www.youtube.com/@mk-1037)
 
 ![MW21 running on Linux Mint plus Cinnamon desktop with hardware attached](mw21/pictures/MW21_hw_playing.png)
+MW21 running on Linux Mint plus Cinnamon desktop with hardware attached
+
+![MW21 Display running together with MusE](mw21/pictures/MW21_Display_with_MusE.png)
+MW21 Display running together with MusE
 
 It's designed to run on GNU/Linux operating system. Currently - installation scripts are designed for debian-based systems with `XFCE`/`Mate`/`Cinnamon` desktop.
 
