@@ -15,21 +15,20 @@
 # You should have received a copy of the GNU General Public License
 # along with MW21.  If not, see <http://www.gnu.org/licenses/>.
 
-import manager
+import managerutils
 from tkinter import *
 from tkinter import ttk
 from tkinter.filedialog import askopenfilenames
 import tkinter as tk
 import os
 import json
-import pprint
 import tapes
 
 homeDir = os.environ['HOME']
 collectionsDir = homeDir + "/MW21/collections"
 config = {}
 
-configPath = homeDir + "/.MW21editor"
+configPath = homeDir + "/.MW21manager"
 
 
 class ScrollableFrame(ttk.Frame):
@@ -64,7 +63,6 @@ if os.path.exists(configPath):
 def loadCollection(*args):
   managerObj.setCollectionName(collectionVar.get())
   managerObj.scanRoot()
-  managerObj.printSongs()
   redrawCollection(managerObj)
 
 def redrawCollection(p_manager):
@@ -182,7 +180,6 @@ def redrawCollection(p_manager):
 
 
     rowindex += 1
-  #pprint.pprint(songLabels)
 
 
 def deleteSelected(*args):
@@ -192,7 +189,6 @@ def deleteSelected(*args):
       managerObj.removeSong(a)
   managerObj.setCollectionName(collectionVar.get())
   managerObj.scanRoot()
-  managerObj.printSongs()
   redrawCollection(managerObj)
 
 def rescan(*args):
@@ -217,11 +213,10 @@ def importTape(*args):
     managerObj.saveConfig()
   managerObj.setCollectionName(collectionVar.get())
   managerObj.scanRoot()
-  managerObj.printSongs()
   redrawCollection(managerObj)
 
 
-managerObj = manager.Manager(config, configPath, collectionsDir, homeDir)
+managerObj = managerutils.Manager(config, configPath, collectionsDir, homeDir)
 songLabels = {}
 songCheckButtons = {}
 songCheckVars = {}
@@ -231,7 +226,7 @@ songMidi = {}
 songText = {}
 
 root = Tk()
-root.title("MW21 Collection Editor")
+root.title("MW21 Manager")
 
 mainframe = ttk.Frame(root).grid(column = 0, row = 0)
 

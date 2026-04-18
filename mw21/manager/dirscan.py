@@ -17,7 +17,7 @@
 
 import glob
 import managerutils
-import pprint
+
 
 class DirScan:
   def __init__(self, rootDir):

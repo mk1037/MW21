@@ -15,10 +15,22 @@
 # You should have received a copy of the GNU General Public License
 # along with MW21.  If not, see <http://www.gnu.org/licenses/>.
 
+import re
 import collection
 import os
 import json
-import pprint
+
+
+g_patternFilename = r"^[a-zA-Z0-9]+_K3[yY][0-9]{2,3}\.(txt|mid|flac|mp3|ogg|wav|delay)$"
+
+def validFilename(p_filename):
+  if re.search(g_patternFilename, p_filename) is not None:
+    return True
+  return False
+
+def getFilenameOnly(p_path):
+  chunks = re.split("/", p_path)
+  return chunks[-1]
 
 class Manager:
   def __init__(self, p_config, p_configPath, p_collectionsDir, p_homeDir ):
@@ -50,9 +62,6 @@ class Manager:
   def scanRoot(self):
     self.collection = collection.Collection(self.collectionsDir + "/" + self.collectionName)
     self.collection.readCollection()
-
-  def printSongs(self):
-    self.collection.printCollection()
 
   def getCollectionNames(self):
     return os.listdir(self.collectionsDir)
@@ -100,3 +109,4 @@ class Manager:
     with open(self.configPath, "w") as f:
       json.dump(self.config, f)
       print("Config has been written to {}".format(self.configPath))
+

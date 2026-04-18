@@ -18,7 +18,7 @@
 import tarfile
 import re
 import io
-import pprint
+
 
 g_patternTapeFilename = r"^[a-zA-Z0-9]+_K3[yY][0-9]{2,3}\.(tar|tar\.gz|tar\.bz2)$"
 
@@ -69,13 +69,8 @@ class Tapes:
         midifiles.append(path)
       if re.search(tapeLabel + ".txt$", path):
         textfiles.append(path)
-        
-    pprint.pprint(audiofiles)
 
-    pprint.pprint(delayfiles)
-    pprint.pprint(midifiles)
-    pprint.pprint(textfiles)
-    
+
     audiofilesNumber = len(audiofiles["flac"]) + len(audiofiles["mp3"]) + len(audiofiles["ogg"]) + len(audiofiles["wav"])
 
     if audiofilesNumber < 1 or len(delayfiles) != 1 or len(midifiles) != 1 or len(textfiles) != 1:

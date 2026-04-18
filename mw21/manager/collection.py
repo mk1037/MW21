@@ -15,15 +15,20 @@
 # You should have received a copy of the GNU General Public License
 # along with MW21.  If not, see <http://www.gnu.org/licenses/>.
 
-import re
+import dirscan
 
-g_patternFilename = r"^[a-zA-Z0-9]+_K3[yY][0-9]{2,3}\.(txt|mid|flac|mp3|ogg|wav|delay)$"
 
-def validFilename(p_filename):
-  if re.search(g_patternFilename, p_filename) is not None:
-    return True
-  return False
+class Collection:
+  def __init__(self, p_root):
+    self.rootDir = p_root
+    self.songs = {}
 
-def getFilenameOnly(p_path):
-  chunks = re.split("/", p_path)
-  return chunks[-1]
+  def readCollection(self):
+    scanObj = dirscan.DirScan(self.rootDir + "/bank_3/**")
+    labels = scanObj.scanDirLabels()
+    self.songs = {}
+    for label in sorted(labels):
+      self.songs[label] = scanObj.preCheckLabel(label)
+
+  def getSongs(self):
+    return self.songs

@@ -155,4 +155,4 @@ createActivator "keyboardMW21" $MW2_DIR/mw21/web $MW2_DIR/mw21/web/vk.sh $MW2_DI
 createActivator "placeMW21" $MW2_DIR/mw21/web place_windows.sh $MW2_DIR/mw21/icons/placeMW21.png true
 createActivator "displayMW21" $MW2_DIR/mw21/web $MW2_DIR/mw21/web/display.sh $MW2_DIR/mw21/icons/displayMW21.png false
 createActivator "collectionMW21" $MW2_DIR collection.sh $MW2_DIR/mw21/icons/collectionMW21.png true
-createActivator "editorMW21" "$MW2_DIR/mw21/editor" "python3 $MW2_DIR/mw21/editor/editor.py" "$MW2_DIR/mw21/icons/editorMW21.png" false
+createActivator "managerMW21" "$MW2_DIR/mw21/manager" "python3 $MW2_DIR/mw21/manager/MW21manager.py" "$MW2_DIR/mw21/icons/managerMW21.png" false
