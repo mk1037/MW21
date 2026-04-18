@@ -46,7 +46,7 @@ else
   echo "Linking collection \"$CHOSEN_COLLECTION\""
   [ -L $MW2_DIR/karaoke_link ] && rm $MW2_DIR/karaoke_link
   ln -s $MW2_DIR/collections/$CHOSEN_COLLECTION $MW2_DIR/karaoke_link
-  printf "\nPlease remember to restart MW21. Press ENTER to exit."
+  printf "\nPlease remember to restart MW21 or click 'Rescan' button in MW21manager when MW21 is up but not playing a song. Press ENTER to exit."
 fi
 
 read x
