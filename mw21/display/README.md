@@ -34,4 +34,6 @@ Display can be controlled as well with PC keyboard:
 * `Page up` - jump to the previous proup
 * `z`, `x`, `c` - select theme
 
+When started from command line with `-noborder` option - the window decoration is hidden.
+
 //mk1037
