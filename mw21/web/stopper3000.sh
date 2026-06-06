@@ -21,10 +21,11 @@
 
 echo "Here is 3000 stopper !"
 
-for playing_item_pid in $(pstree -hpl | grep -e "$PLAYER3000_SCRIPT" | awk '{ gsub(".*pmidi\\(", ""); gsub("\\).*", ""); print; }'); do
-  kill -2 "$playing_item_pid"
+for playing_item_pid in $(ps -u $(whoami) | grep aplaymidi | awk '{print $1}'); do
+echo "$playing_item_pid"
+kill -9 $playing_item_pid
 done
 
-sleep 0.1
+ps -ef | grep -e "aplay " | grep -v grep |  awk '{print $2;}' | xargs kill -9
 
-$STOPVPL2_PATH
+sleep 0.1

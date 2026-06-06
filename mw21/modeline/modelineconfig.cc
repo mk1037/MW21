@@ -33,6 +33,7 @@ ModelineConfig::ModelineConfig() {
   activeHintsColor[0]        = "b4b4b4";
   hintsOutlineColor[0]       = "202020";
   activeHintsOutlineColor[0] = "707070";
+  inactiveLyricsColor[0]     = "ffffff";
 
   backgroundColor[1]        = "e4e424ff";
   sungBackgroundColor[1]    = "f4f422ff";
@@ -46,6 +47,7 @@ ModelineConfig::ModelineConfig() {
   activeHintsColor[1]        = "b4b424";
   hintsOutlineColor[1]       = "f02020";
   activeHintsOutlineColor[1] = "707020";
+  inactiveLyricsColor[1]     = "ffffff";
 
   backgroundColor[2]        = "34e4a4ff";
   sungBackgroundColor[2]    = "f4f422ff";
@@ -59,6 +61,7 @@ ModelineConfig::ModelineConfig() {
   activeHintsColor[2]        = "b4b424";
   hintsOutlineColor[2]       = "f02020";
   activeHintsOutlineColor[2] = "707020";
+  inactiveLyricsColor[2]     = "ffffff";
 
 
   modelineBackgroundColor_neutral1         = "000000ff";
@@ -180,6 +183,12 @@ Glib::ustring ModelineConfig::getActiveHintsOutlineColor(unsigned int p_idx)
 {
   if(p_idx < THEMES_NUM) return activeHintsOutlineColor[p_idx];
   return activeHintsOutlineColor[0];
+}
+
+Glib::ustring ModelineConfig::getInactiveLyricsColor(unsigned int p_idx)
+{
+  if(p_idx < THEMES_NUM) return inactiveLyricsColor[p_idx];
+  return inactiveLyricsColor[0];
 }
 
 
@@ -434,6 +443,8 @@ int ModelineConfig::readConfig(Glib::ustring filename)
     activeHintsColor[i] = keyfile.get_value("MAIN", "activeHintsColor" + indexStream.str());
     hintsOutlineColor[i] = keyfile.get_value("MAIN", "hintsOutlineColor" + indexStream.str());
     activeHintsOutlineColor[i] = keyfile.get_value("MAIN", "activeHintsOutlineColor" + indexStream.str());
+
+    inactiveLyricsColor[i] = keyfile.get_value("MAIN", "inactiveLyricsColor" + indexStream.str());
   }
 
 

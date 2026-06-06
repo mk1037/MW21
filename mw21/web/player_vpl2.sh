@@ -114,12 +114,13 @@ function play_vpl { # dir item K3Y_vs_BREAK
 #       echo "tmp volume is $TMP_VOLUME"
 #       echo "tmp gain is $TMP_GAIN"
 #       echo "EQ $TMP_EQ_FLAG"
-      create_vlc_config ./templates/alsa_music_template $TMP_GAIN "$TMP_EQ_FLAG"
+#      create_vlc_config ./templates/alsa_music_template $TMP_GAIN "$TMP_EQ_FLAG"
     else
       create_vlc_config ./templates/alsa_music_template "1.000000" "$TMP_EQ_FLAG"
     fi
     echo "$C_TIMESTAMP AUDIO $K3Y_VS_BREAK $ITEM_FILENAME" >> $PLAYVPL2_LOGS_PATH
-    cvlc --extraintf http --http-host 127.0.0.1 --http-port $VLC_PORT --http-password $VLC_PASSWORD --no-volume-save $WAVES_DIR/$ITEM_FILENAME 2>>$PLAY2_LOG
+    date +%s%N > /tmp/W
+    aplay $WAVES_DIR/$ITEM_FILENAME 2>>$PLAY2_LOG
   else
     # create tmp movie template
     create_vlc_config ./templates/alsa_movie_template "1.000000" "$TMP_EQ_FLAG"

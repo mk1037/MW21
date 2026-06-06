@@ -58,23 +58,6 @@ void DisplayArea::set_color_theme(int p_idx)
   this->theme_nr = p_idx;
 }
 
-/*
-void DisplayArea::render_frame(FrameContent &frame)
-{
-  try
-  {
-    m_image = Gdk::Pixbuf::create (Gdk::COLORSPACE_RGB, false, 8, config->getAreaWidth(), config->getAreaHeight());
-    m_image->fill(0x78787800);
-  }
-  catch(...)
-  {
-    std::cerr << "Some exception in DisplayArea::render_string(Glib::ustring &str)" << std::endl;
-  }
-  if (m_image)
-    set_size_request(m_image->get_width()/2, m_image->get_height()/2);
-}
-*/
-
 void DisplayArea::render_string(Glib::ustring &left, Glib::ustring &right, int p_state, bool p_is_hint)
 {
   total_width = (int)( (((float)config->getAreaHeight()) * 0.17f) );
@@ -450,16 +433,7 @@ void DisplayArea::set_pixel(Pixel32 *pixel, int x, int y)
 {
   set_pixel(m_image, pixel, x, y);
 }
-/*
-Pixel32 DisplayArea::get_pixel(Glib::RefPtr<Gdk::Pixbuf> source, unsigned int x, unsigned int y)
-{
-  int src_width = what->get_width();
-  int src_height = what->get_height();
-  int src_rowstride = what->get_rowstride();
 
-  guint8 *src_data = what->get_pixels();
-}
-*/
 void DisplayArea::Print(int bytesize)
 {
   if(!m_image) return;
@@ -476,162 +450,67 @@ void DisplayArea::render_glyph(gunichar ch, int p_font_R, int p_font_G, int p_fo
   FT_Face face = *facep;
   FT_Library library = *libraryp;
   FT_UInt gindex = FT_Get_Char_Index(face, (wchar_t)ch);
+
   if(' ' == ch)
   {
     origin_x += space_width;
     previous = gindex;
-	  return;
+    return;
   }
-  //std::cout << "gindex  = " << gindex << std::endl;
+
   if (FT_Load_Glyph(face, gindex, FT_LOAD_NO_BITMAP) == 0)
   {
-      // Need an outline for this to work.
-      if (face->glyph->format == FT_GLYPH_FORMAT_OUTLINE)
+    FT_Glyph glyph;
+    if (FT_Get_Glyph(face->glyph, &glyph) == 0)
+    {
+      int bearingX = (int) ( face->glyph->metrics.horiBearingX >> 6 );
+      int bearingY = (int) ( face->glyph->metrics.horiBearingY >> 6 );
+
+      advance =  (int) ( face->glyph->advance.x >> 6 );
+      int glyph_width = (int)( face->glyph->metrics.width >> 6 );
+      int glyph_height = (int)( face->glyph->metrics.height >> 6 );
+
+      int imgWidth = glyph_width;
+      int imgHeight = glyph_height;
+      int imgSize = imgWidth * imgHeight;
+
+      Pixel32 *pxl = new Pixel32[imgSize];
+      memset(pxl, 0, sizeof(Pixel32) * imgSize);
+
+      uint8 text_r, text_g, text_b;
+      uint8 out_r, out_g, out_b;
+
+      text_r = p_font_R;
+      text_g = p_font_G;
+      text_b = p_font_B;
+      out_r = p_outline_R;
+      out_g = p_outline_G;
+      out_b = p_outline_B;
+
+      FT_Render_Glyph(face->glyph, FT_RENDER_MODE_NORMAL);
+
+      for (int i = 0; i < (int)face->glyph->bitmap.rows; i++)
       {
-        // Render the basic glyph to a span list.
-        //std::cout << "RENDERING FRONT SPANS" << std::endl;
-        Spans spans;
-        //std::cout << "Before render front, spans size is : " << spans.size() << std::endl;
-        RenderSpans(library, &face->glyph->outline, &spans);
-        //std::cout << "After render front, spans size is : " << spans.size() << std::endl;
-        // Next we need the spans for the outline.
-        Spans outlineSpans;
-
-        // Set up a stroker.
-        FT_Stroker stroker;
-        FT_Stroker_New(library, &stroker);
-        FT_Stroker_Set(stroker,
-                       (int)(config->getOutlineWidth() * 64),
-                       FT_STROKER_LINECAP_ROUND,
-                       FT_STROKER_LINEJOIN_ROUND,
-                       0);
-
-        FT_Glyph glyph;
-        if (FT_Get_Glyph(face->glyph, &glyph) == 0)
+        for (int j = 0; j < (int)face->glyph->bitmap.width; j++)
         {
-          FT_Glyph_StrokeBorder(&glyph, stroker, 0, 1);
-          // Again, this needs to be an outline to work.
-          if (glyph->format == FT_GLYPH_FORMAT_OUTLINE)
-          {
-            //std::cout << "RENDERING OUTLINE SPANS" << std::endl;
-            // Render the outline spans to the span list
-            FT_Outline *o =
-              &reinterpret_cast<FT_OutlineGlyph>(glyph)->outline;
-            RenderSpans(library, o, &outlineSpans);
-          }
-
-          // Clean up afterwards.
-          FT_Stroker_Done(stroker);
-          FT_Done_Glyph(glyph);
-
-          // Now we need to put it all together.
-          if (!spans.empty())
-          {
-            // Figure out what the bounding rect is for both the span lists.
-            Rect rect(spans.front().x,
-                      spans.front().y,
-                      spans.front().x,
-                      spans.front().y);
-            for (Spans::iterator s = spans.begin();
-                 s != spans.end(); ++s)
-            {
-              rect.Include(Vec2(s->x, s->y));
-              rect.Include(Vec2(s->x + s->width - 1, s->y));
-            }
-            for (Spans::iterator s = outlineSpans.begin();
-                 s != outlineSpans.end(); ++s)
-            {
-              rect.Include(Vec2(s->x, s->y));
-              rect.Include(Vec2(s->x + s->width - 1, s->y));
-            }
-
-            int bearingX = (int) ( face->glyph->metrics.horiBearingX >> 6 );
-            int bearingY = (int) ( face->glyph->metrics.horiBearingY >> 6 );
-            advance =  (int) ( face->glyph->advance.x >> 6 );
-
-
-            int imgWidth = rect.Width(),
-                imgHeight = rect.Height(),
-                imgSize = imgWidth * imgHeight;
-
-            //std::cout << "dimensions of out rect is " << imgWidth << " x " << imgHeight << std::endl;
-
-            // Allocate data for our image and clear it out to transparent.
-            Pixel32 *pxl = new Pixel32[imgSize];
-            memset(pxl, 0, sizeof(Pixel32) * imgSize);
-
-            uint8 text_r, text_g, text_b;
-            uint8 out_r, out_g, out_b;
-
-            text_r = p_font_R;
-            text_g = p_font_G;
-            text_b = p_font_B;
-
-            out_r = p_outline_R;
-            out_g = p_outline_G;
-            out_b = p_outline_B;
-
-            // Loop over the outline spans and just draw them into the
-            // image.
-            for (Spans::iterator s = outlineSpans.begin();
-                 s != outlineSpans.end(); ++s)
-            {
-              for (int w = 0; w < s->width; ++w)
-              {
-                //std::cout << (int)get_red_value(config->getLyricsOutlineColor()) << std::endl;
-                Pixel32 l_pixel = Pixel32(out_r, out_g, out_b, s->coverage);
-                //l_pixel.print_this();
-                
-                pxl[(int)((imgHeight - 1 - (s->y - rect.ymin)) * imgWidth
-                          + s->x - rect.xmin + w)] = l_pixel;
-              }
-            }
-
-            // Then loop over the regular glyph spans and blend them into
-            // the image.
-            for (Spans::iterator s = spans.begin();
-                 s != spans.end(); ++s)
-            {
-              for (int w = 0; w < s->width; ++w)
-              {
-                Pixel32 &dst =
-                  pxl[(int)((imgHeight - 1 - (s->y - rect.ymin)) * imgWidth
-                      + s->x - rect.xmin + w)];
-                Pixel32 src = 
-                  Pixel32(text_r, text_g, text_b, s->coverage);
-
-                dst.r = (int)(dst.r + ((src.r - dst.r) * src.a) / 255.0f);
-                dst.g = (int)(dst.g + ((src.g - dst.g) * src.a) / 255.0f);
-                dst.b = (int)(dst.b + ((src.b - dst.b) * src.a) / 255.0f);
-                dst.a = MIN(255, dst.a + src.a);
-              }
-            }
-            m_char = Gdk::Pixbuf::create (Gdk::COLORSPACE_RGB, true, 8, imgWidth, imgHeight);
-            for (int i = 0; i < imgHeight; i++)
-            {
-              for (int j = 0; j < imgWidth; j++)
-              {
-                set_pixel(m_char, pxl + (i * imgWidth + j), j , i);
-              }
-            }
-            delete [] pxl;
-			      //std::cout << "origin_x " << origin_x << " bearing_x " << bearingX << " bearing_y " << bearingY << " advance " << advance << std::endl;
-            paste_blend_pixbuf(m_overlay, m_char, (int)(origin_x + bearingX), (int)(origin_y - bearingY));
-			      /*if ( use_kerning && previous && gindex )
-            {
-              std::cout << "Computing kerning. gindex " << gindex << " previous " << previous << std::endl;
-              FT_Vector  delta;
-              FT_Get_Kerning( face, previous, gindex,
-              FT_KERNING_DEFAULT, &delta );
-              std::cout << "delta.x = " << (delta.x >> 6) << std::endl;
-              origin_x += delta.x << 6;
-            }*/
-            origin_x += advance;
-            //previous = gindex;
-          }
+          unsigned char p = face->glyph->bitmap.buffer [i * face->glyph->bitmap.pitch + j];
+          Pixel32 l_pixel = Pixel32(text_r, text_g, text_b, p);
+          pxl[ i * imgWidth +  j] = l_pixel;
         }
       }
 
-  }
+      m_char = Gdk::Pixbuf::create (Gdk::COLORSPACE_RGB, true, 8, imgWidth, imgHeight);
+      for (int i = 0; i < imgHeight; i++)
+      {
+        for (int j = 0; j < imgWidth; j++)
+        {
+          set_pixel(m_char, pxl + (i * imgWidth + j), j , i);
+        }
+      }
+      delete [] pxl;
 
+      paste_blend_pixbuf(m_overlay, m_char, (int)(origin_x + bearingX), (int)(origin_y - bearingY));
+      origin_x += advance;
+    }
+  }
 }

@@ -48,8 +48,23 @@ if [ ! -z $player3000_match_code ] ; then
 # compute playlist and args for playvpl2 and execute "signal_playvpl2.sh" script (it is extra script which is ready already)
   echo $TITLE_TO_PLAY > $PLAYVPL2_PLAYLIST
   echo "$DATA_DIRECTORY/bank_3/waves/ $MW2_WEB_DIR/mw2_web_log2 K3Y $EXEC_DELAY_VALUE" > $PLAYVPL2_ARGS_PATH
-  $SIGNAL_PLAYVPL2_PATH
-  pmidi -d 0 -p "14:0" "$DATA_DIRECTORY/bank_3/midi/$TITLE_TO_PLAY.mid"
+  #$SIGNAL_PLAYVPL2_PATH
+  TOTAL_TIME_OFFSET=$(echo "$GLOBAL_DELAY + $EXEC_DELAY_VALUE" | bc)
+  ONE_IF_POSITIVE=$(echo "$TOTAL_TIME_OFFSET > 0" | bc)
+
+
+  date +%s%N > /tmp/M
+  aplaymidi -d 0 -p "14:0" "$DATA_DIRECTORY/bank_3/midi/$TITLE_TO_PLAY.mid" &
+
+  if [ "$ONE_IF_POSITIVE" -gt 0 ]; then
+    echo "sleeping $TOTAL_TIME_OFFSET"
+    sleep $TOTAL_TIME_OFFSET
+  else
+    echo "Not sleeping $TOTAL_TIME_OFFSET"
+  fi
+
+  date +%s%N > /tmp/W
+  aplay $DATA_DIRECTORY/bank_3/waves/$TITLE_TO_PLAY.wav
   #sleep 20
 fi
 

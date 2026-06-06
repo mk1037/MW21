@@ -36,7 +36,7 @@ if [[ $PLAY_NEXT != "true" ]]; then
   ps -ef | grep player_vpl2 | grep -v grep |  awk '{print $2;}' | xargs kill -9
 fi
 
-ps -ef | grep -e "vlc" | grep -v grep |  awk '{print $2;}' | xargs kill -9
+ps -ef | grep -e "aplay " | grep -v grep |  awk '{print $2;}' | xargs kill -9
 sleep 1
 
 echo "true"

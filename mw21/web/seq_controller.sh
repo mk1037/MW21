@@ -103,7 +103,7 @@ if [ $ACTION == "PLAY" ]; then
     echo "EXISTING_PLAYER_3000 are $EXISTING_PLAYER_3000"
 
     echo "checking for existing wave players"
-    EXISTING_PLAYER_WAVE=$(ps -u $(whoami) | grep vlc)
+    EXISTING_PLAYER_WAVE=$(ps -u $(whoami) | grep aplay$)
     echo "EXISTING_PLAYER_WAVE are $EXISTING_PLAYER_WAVE"
 
     if [[ $EXISTING_PLAYER_3000 == "" && $EXISTING_PLAYER_WAVE == "" ]]; then

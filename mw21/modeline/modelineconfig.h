@@ -59,6 +59,8 @@ private:
   Glib::ustring hintsOutlineColor[THEMES_NUM];
   Glib::ustring activeHintsOutlineColor[THEMES_NUM];
 
+  Glib::ustring inactiveLyricsColor[THEMES_NUM];
+
   // ############# MODELINE COLOURS ##############
   Glib::ustring modelineBackgroundColor_neutral1;
   Glib::ustring modelineBackgroundColor_neutral2;
@@ -125,6 +127,8 @@ public:
   Glib::ustring getActiveHintsColor(unsigned int p_th_idx);
   Glib::ustring getHintsOutlineColor(unsigned int p_th_idx);
   Glib::ustring getActiveHintsOutlineColor(unsigned int p_th_idx);
+
+  Glib::ustring getInactiveLyricsColor(unsigned int p_th_idx);
 
   Glib::ustring getModelineBackgroundColor_neutral1();
   Glib::ustring getModelineBackgroundColor_neutral2();
