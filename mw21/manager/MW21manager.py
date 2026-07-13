@@ -61,6 +61,7 @@ if os.path.exists(configPath):
     print("Config has been read from {}".format(configPath))
 
 def loadCollection(*args):
+  decode_audio()
   managerObj.setCollectionName(collectionVar.get())
   managerObj.scanRoot()
   redrawCollection(managerObj)
@@ -187,13 +188,19 @@ def deleteSelected(*args):
     print("{} {}".format(a, songCheckVars[a].get()))
     if songCheckVars[a].get() == 1:
       managerObj.removeSong(a)
+  decode_audio()
   managerObj.setCollectionName(collectionVar.get())
   managerObj.scanRoot()
   redrawCollection(managerObj)
 
 def rescan(*args):
   os.chdir(homeDir + "/MW21/mw21/web")
+  os.system(homeDir + "/MW21/mw21/web/decode_audio.sh")
   os.system(homeDir + "/MW21/mw21/web/rescan_mw2.sh")
+
+def decode_audio():
+  os.chdir(homeDir + "/MW21/mw21/web")
+  os.system(homeDir + "/MW21/mw21/web/decode_audio.sh")
 
 
 def importTape(*args):
@@ -207,6 +214,7 @@ def importTape(*args):
   lastPath = None
   for apath in files:
     lastPath = tapesObj.importTape(apath, managerObj.getFormatPrio())
+  decode_audio()
 
   if lastPath is not None:
     managerObj.setTapesRecentDir(lastPath)

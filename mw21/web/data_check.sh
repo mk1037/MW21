@@ -45,7 +45,7 @@ fi
 if [ "$BANK_3_MID_NUMBER" -ne "$BANK_3_WAVES_NUMBER" ]; then
   echo "Number of files in bank_3 mid vs waves differ !!!"
   ls $DATA_DIRECTORY/bank_3/midi/ | sed 's/\.mid\b//g' | sort > $DATA_CHECK_DIFF_LEFT
-  ls $DATA_DIRECTORY/bank_3/waves/ | sed 's/\.mp3\b\|\.flac\b\|\.ogg\b\|\.wav\b//g' | sort > $DATA_CHECK_DIFF_RIGHT
+  ls $DATA_DIRECTORY/bank_3/waves/ | sed 's/\.wav\b//g' | sort > $DATA_CHECK_DIFF_RIGHT
   diff -u $DATA_CHECK_DIFF_LEFT $DATA_CHECK_DIFF_RIGHT
   exit 1;
 fi
@@ -61,24 +61,24 @@ for name in $(ls $DATA_DIRECTORY/bank_3/text/ ); do
 
   FOUND_AUDIO=1
 
-  [ -f $DATA_DIRECTORY/bank_3/waves/$base_file_name.flac ] || [ -f $DATA_DIRECTORY/bank_3/waves/$base_file_name.ogg ] || [ -f $DATA_DIRECTORY/bank_3/waves/$base_file_name.mp3 ] || [ -f $DATA_DIRECTORY/bank_3/waves/$base_file_name.wav ] || [ -l $DATA_DIRECTORY/bank_3/waves/$base_file_name.flac ] || [ -l $DATA_DIRECTORY/bank_3/waves/$base_file_name.ogg ] || [ -l $DATA_DIRECTORY/bank_3/waves/$base_file_name.mp3 ] || [ -l $DATA_DIRECTORY/bank_3/waves/$base_file_name.wav ] || FOUND_AUDIO=0
+  [ -f $DATA_DIRECTORY/bank_3/waves/$base_file_name.wav ] || [ -L $DATA_DIRECTORY/bank_3/waves/$base_file_name.wav ] || FOUND_AUDIO=0
 
   if [ "$FOUND_AUDIO" == "0" ]; then
-    echo "No audio file for label $base_file_name"
+    echo "No audio .wav file for label $base_file_name"
     echo "Exiting ..."
     exit 1;
   fi
 
   delay_file_name=$base_file_name.delay
   if [ ! -f $DATA_DIRECTORY/bank_3/delay/$delay_file_name ]; then
-    echo "No file $DATA_DIRECTORY/bank_3/delay/$delay_file_name"
+    echo "No delay file $DATA_DIRECTORY/bank_3/delay/$delay_file_name"
     echo "Exiting ..."
     exit 1;
   fi
 
   midi_file_name=$base_file_name.mid
   if [ ! -f $DATA_DIRECTORY/bank_3/midi/$midi_file_name ]; then
-    echo "No file $DATA_DIRECTORY/bank_3/midi/$midi_file_name"
+    echo "No midi file $DATA_DIRECTORY/bank_3/midi/$midi_file_name"
     echo "Exiting ..."
     exit 1;
   fi

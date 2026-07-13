@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Copyright (C) 2017-2025 Marek Momot
+# Copyright (C) 2017-2026 Marek Momot
 #
 # This file is part of MW21.
 #
@@ -84,14 +84,12 @@ sudo apt-get install -y build-essential \
   libfreetype-dev \
   git \
   wmctrl \
-  vlc \
   bc \
-  pmidi \
-  a2jmidid \
-  gmidimonitor \
-  mc \
   vkeybd \
   wget \
+  vorbis-tools \
+  lame \
+  flac \
   python3-tk \
   meld
 

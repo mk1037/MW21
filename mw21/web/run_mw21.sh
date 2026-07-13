@@ -52,6 +52,7 @@ cp ../mw2_config /tmp/mw2_config
 echo "Initializing directory $COMMON_DIRECTORY"
 [ -d $COMMON_DIRECTORY ] || mkdir -p $COMMON_DIRECTORY
 
+./decode_audio.sh
 ./data_check.sh
 
 if [ "$?" != "0" ]; then
