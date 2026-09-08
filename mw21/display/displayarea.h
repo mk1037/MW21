@@ -50,8 +50,11 @@ protected:
   bool on_draw(const Cairo::RefPtr<Cairo::Context>& cr);// override;
   Glib::RefPtr<Gdk::Pixbuf> m_image;
   Glib::RefPtr<Gdk::Pixbuf> m_overlay;
+  Glib::RefPtr<Gdk::Pixbuf> m_overlay_m1;
   Glib::RefPtr<Gdk::Pixbuf> m_char;
+  Glib::RefPtr<Gdk::Pixbuf> m_m1char;
   Glib::RefPtr<Gdk::Pixbuf> m_clip;
+  Glib::RefPtr<Gdk::Pixbuf> m_m1clip;
   
 
 private:

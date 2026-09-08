@@ -34,6 +34,9 @@ MW2_DIR=$(pwd)
 tar -zxvf main.tar.gz ExampleTracksForMW21-main/ExampleTracksForMW21/karaoke/
 mv ExampleTracksForMW21-main/ExampleTracksForMW21/karaoke/ $MW2_DIR/collections/example
 
+lame --decode $MW2_DIR/collections/example/bank_3/waves/MW21Intro_K3Y01.mp3 $MW2_DIR/collections/example/bank_3/waves/MW21Intro_K3Y01.wav
+rm $MW2_DIR/collections/example/bank_3/waves/MW21Intro_K3Y01.mp3
+
 tar -zxvf main.tar.gz ExampleTracksForMW21-main/ExampleTracksForMW21/tapes/
 mv ExampleTracksForMW21-main/ExampleTracksForMW21/tapes/* $MW2_DIR/tapes/
 

@@ -243,7 +243,9 @@ void DisplayArea::render_string(Glib::ustring &left, Glib::ustring &right, int p
 //    m_overlay = Gdk::Pixbuf::create_from_file("./image/fractal_image.png");
     //m_overlay = Gdk::Pixbuf::create_from_file("./image/kwadr_grad.png");
     m_overlay = Gdk::Pixbuf::create (Gdk::COLORSPACE_RGB, true, 8, config->getAreaWidth() * 3 , config->getAreaHeight());
-    m_overlay->fill(backgroundColor);
+    m_overlay->fill(0x00000000);
+    m_overlay_m1 = Gdk::Pixbuf::create (Gdk::COLORSPACE_RGB, true, 8, config->getAreaWidth() * 3 , config->getAreaHeight());
+    m_overlay_m1->fill(0x00000000);
 
   
 //    m_overlay->fill(0x00af0000);
@@ -263,15 +265,29 @@ void DisplayArea::render_string(Glib::ustring &left, Glib::ustring &right, int p
       render_glyph(right.at(i), rightFontColorR, rightFontColorG, rightFontColorB, rightFontOutlineColorR, rightFontOutlineColorG, rightFontOutlineColorB);
 	  }
     origin_x += space_width;
-    m_clip = Gdk::Pixbuf::create (Gdk::COLORSPACE_RGB, true, 8, std::min(origin_x, (int)(config->getAreaWidth() * 3))  , config->getAreaHeight());
-    paste_pixbuf(m_clip, m_overlay, 0, 0);
+
+    int shift_outline = (int)config->getOutlineWidth();
+
+
     if(origin_x <= (int)(config->getAreaWidth()))
     {
-      paste_pixbuf(m_clip, ((int)(config->getAreaWidth()) - origin_x) / 2, 0);
+      m_m1clip = Gdk::Pixbuf::create (Gdk::COLORSPACE_RGB, true, 8, config->getAreaWidth() - 2*shift_outline, config->getAreaHeight() - 2*shift_outline);
+
+      m_overlay_m1->copy_area(shift_outline, shift_outline, config->getAreaWidth() - 2*shift_outline, config->getAreaHeight() - 2*shift_outline, m_m1clip, 0, 0);
+      paste_blend_pixbuf(m_m1clip, ((int)(config->getAreaWidth()) - origin_x) / 2 + 2*shift_outline, 2*shift_outline);
+      paste_blend_pixbuf(m_overlay, ((int)(config->getAreaWidth()) - origin_x) / 2, 0);
     }
     else
     {
-      paste_pixbuf(m_clip->scale_simple(config->getAreaWidth(), config->getAreaHeight(), Gdk::INTERP_BILINEAR), 0, 0);
+      m_m1clip = Gdk::Pixbuf::create (Gdk::COLORSPACE_RGB, true, 8, origin_x - 2*shift_outline, config->getAreaHeight() - 2*shift_outline);
+      m_clip = Gdk::Pixbuf::create (Gdk::COLORSPACE_RGB, true, 8, origin_x, config->getAreaHeight());
+
+      m_overlay_m1->copy_area(shift_outline, shift_outline, origin_x - 2*shift_outline, config->getAreaHeight() - 2*shift_outline, m_m1clip, 0, 0);
+      m_overlay->copy_area(0, 0, origin_x, config->getAreaHeight(), m_clip, 0, 0);
+
+      paste_blend_pixbuf(m_m1clip->scale_simple(config->getAreaWidth() - 2*shift_outline, config->getAreaHeight() - 2*shift_outline, Gdk::INTERP_BILINEAR), 2*shift_outline, 2*shift_outline);
+
+      paste_blend_pixbuf(m_clip->scale_simple(config->getAreaWidth(), config->getAreaHeight(), Gdk::INTERP_BILINEAR), 0, 0);
     }
   }
   catch(...)
@@ -475,7 +491,9 @@ void DisplayArea::render_glyph(gunichar ch, int p_font_R, int p_font_G, int p_fo
       int imgSize = imgWidth * imgHeight;
 
       Pixel32 *pxl = new Pixel32[imgSize];
+      Pixel32 *m1pxl = new Pixel32[imgSize];
       memset(pxl, 0, sizeof(Pixel32) * imgSize);
+      memset(m1pxl, 0, sizeof(Pixel32) * imgSize);
 
       uint8 text_r, text_g, text_b;
       uint8 out_r, out_g, out_b;
@@ -495,21 +513,27 @@ void DisplayArea::render_glyph(gunichar ch, int p_font_R, int p_font_G, int p_fo
         {
           unsigned char p = face->glyph->bitmap.buffer [i * face->glyph->bitmap.pitch + j];
           Pixel32 l_pixel = Pixel32(text_r, text_g, text_b, p);
+          Pixel32 l_m1pixel = Pixel32(out_r, out_g, out_b, p);
           pxl[ i * imgWidth +  j] = l_pixel;
+          m1pxl[ i * imgWidth +  j] = l_m1pixel;
         }
       }
 
       m_char = Gdk::Pixbuf::create (Gdk::COLORSPACE_RGB, true, 8, imgWidth, imgHeight);
+      m_m1char = Gdk::Pixbuf::create (Gdk::COLORSPACE_RGB, true, 8, imgWidth, imgHeight);
       for (int i = 0; i < imgHeight; i++)
       {
         for (int j = 0; j < imgWidth; j++)
         {
           set_pixel(m_char, pxl + (i * imgWidth + j), j , i);
+          set_pixel(m_m1char, m1pxl + (i * imgWidth + j), j , i);
         }
       }
       delete [] pxl;
+      delete [] m1pxl;
 
       paste_blend_pixbuf(m_overlay, m_char, (int)(origin_x + bearingX), (int)(origin_y - bearingY));
+      paste_blend_pixbuf(m_overlay_m1, m_m1char, (int)(origin_x + bearingX), (int)(origin_y - bearingY));
       origin_x += advance;
     }
   }
